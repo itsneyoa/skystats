@@ -26,12 +26,22 @@ module.exports = {
         	if(res.status != 200){
 				return message.channel.send(
 					new Discord.MessageEmbed()
-					.setDescription(`No Minecraft account found for IGN: \`${ign}\``)
+					.setDescription(`No Minecraft account found for \`${ign}\``)
 					.setColor('DC143C')
 				)
 			}
     	}); // Test if IGN esists
 
+		// At this point we know its a valid IGN, but not if it has skyblock profiles
+		var apiData = await getApiData(ign); // Gets all skyblock player data from Senither's Hypixel API Facade
+
+		if(apiData.status == 404) return message.channel.send(
+			new Discord.MessageEmbed()
+			.setDescription(`No Skyblock profile found for \`${ign}\``)
+			.setColor('DC143C')
+		)
+
+		// IGN is valid and player has skyblock profiles
 	},
 };
 
@@ -40,4 +50,10 @@ async function getUUID(ign){
     const result = await response.json();
     const uuid = result.id;
     return uuid.substr(0,8)+"-"+uuid.substr(8,4)+"-"+uuid.substr(12,4)+"-"+uuid.substr(16,4)+"-"+uuid.substr(20);
+}
+
+async function getApiData(ign) {
+	const UUID = await getUUID(ign);
+	const response = await fetch(`https://hypixel-api.senither.com/v1/profiles/${UUID}/save?key=${config.discord.apiKey}`);
+	return await response.json();
 }
