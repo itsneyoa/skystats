@@ -1,6 +1,5 @@
 const Discord = require('discord.js');
 const chalk = require('chalk');
-const fetch = require('node-fetch');
 const config = require('./config.json');
 const fs = require('fs');
 
