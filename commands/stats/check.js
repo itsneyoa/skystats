@@ -34,6 +34,7 @@ module.exports = {
 					new Discord.MessageEmbed()
 					.setDescription(`No Minecraft account found for \`${ign}\``)
 					.setColor('DC143C')
+					.setTimestamp()
 				).then(message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error)))
 			}
     	}); // Test if IGN esists
@@ -47,6 +48,7 @@ module.exports = {
 			new Discord.MessageEmbed()
 			.setDescription(`No Skyblock profile found for \`${ign}\``)
 			.setColor('DC143C')
+			.setTimestamp()
 		).then(message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error)))
 
 		// IGN is valid and player has skyblock profiles
@@ -56,6 +58,7 @@ module.exports = {
 			.setAuthor(ign, `https://cravatar.eu/helmavatar/${ign}/600.png`, `https://sky.shiiyu.moe/stats/${ign}`)
 			.setDescription('You currently have skills API disabled, please enable it in the skyblock menu and try again')
 			.setColor('DC143C')
+			.setTimestamp()
 		).then(message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error)))
 
 		return message.channel.send(
@@ -80,6 +83,7 @@ module.exports = {
 				}
 			)
 			.setColor('7CFC00')
+			.setTimestamp()
 		).then(message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error)))
 	},
 };
