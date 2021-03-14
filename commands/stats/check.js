@@ -3,6 +3,10 @@ const config = require('../../config.json');
 const fetch = require('node-fetch');
 const chalk = require('chalk');
 
+const yes = `<:yes:819295941621841970>`;
+const no = `<:no:819295822230716467>`;
+const loading = `819138970771652609`
+
 module.exports = {
 	name: 'check',
     aliases: ['c', 'stats'],
@@ -20,6 +24,8 @@ module.exports = {
 			var ign = args[0];
 		} // Gets IGN
 
+		message.react(loading);
+
 		fetch(`https://api.mojang.com/users/profiles/minecraft/${ign}`)
     	.then(res => {
         	if(res.status != 200){
@@ -27,7 +33,7 @@ module.exports = {
 					new Discord.MessageEmbed()
 					.setDescription(`No Minecraft account found for \`${ign}\``)
 					.setColor('DC143C')
-				)
+				).then(message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error)))
 			}
     	}); // Test if IGN esists
 
@@ -40,7 +46,7 @@ module.exports = {
 			new Discord.MessageEmbed()
 			.setDescription(`No Skyblock profile found for \`${ign}\``)
 			.setColor('DC143C')
-		)
+		).then(message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error)))
 
 		// IGN is valid and player has skyblock profiles
 
@@ -49,7 +55,31 @@ module.exports = {
 			.setAuthor(ign, `https://cravatar.eu/helmavatar/${ign}/600.png`, `https://sky.shiiyu.moe/stats/${ign}`)
 			.setDescription('You currently have skills API disabled, please enable it in the skyblock menu and try again')
 			.setColor('DC143C')
-		)
+		).then(message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error)))
+
+		return message.channel.send(
+			new Discord.MessageEmbed()
+			.setAuthor(ign, `https://cravatar.eu/helmavatar/${ign}/600.png`, `https://sky.shiiyu.moe/stats/${ign}`)
+			.setDescription(`**Profile:** ${apiData.data.name}`)
+			.addFields(
+				{
+					name: "Skill Roles",
+					value: getSkillRoles(apiData),
+					inline: true
+				},
+				{
+					name: "Dungeon Carriers",
+					value: getDungeonRoles(apiData),
+					inline: true
+				},
+				{
+					name: "Weights",
+					value: getWeights(apiData),
+					inline: true
+				}
+			)
+			.setColor('7CFC00')
+		).then(message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error)))
 	},
 };
 
@@ -70,4 +100,41 @@ async function getTrueIgn(ign) {
 	const response = await fetch(`https://api.mojang.com/users/profiles/minecraft/${ign}`);
     const result = await response.json();
     return result.name;
+}
+
+function getSkillRoles(apiData) {
+	var taming = apiData.data.skills.taming.level == config.requirements.skills.taming;
+	var alchemy = apiData.data.skills.alchemy.level == config.requirements.skills.alchemy;
+	if(taming) taming = yes; else taming = no;
+	if(alchemy) alchemy = yes; else alchemy = no;
+	return [
+		`Taming:	${taming}`,
+		`Alchemy:	${alchemy}`
+	].join('\n');
+}
+
+function getDungeonRoles(apiData) {
+	var f4 = apiData.data.dungeons.types.catacombs.level >= config.requirements.dungeons.f4;
+	var f5 = apiData.data.dungeons.types.catacombs.level >= config.requirements.dungeons.f5;
+	var f6 = apiData.data.dungeons.types.catacombs.level >= config.requirements.dungeons.f6;
+	var f7 = apiData.data.dungeons.types.catacombs.level >= config.requirements.dungeons.f7;
+	if(f4) f4 = yes; else f4 = no;
+	if(f5) f5 = yes; else f5 = no;
+	if(f6) f6 = yes; else f6 = no;
+	if(f7) f7 = yes; else f7 = no;
+	return [
+		`Floor 4:	${f4}`,
+		`Floor 5:	${f5}`,
+		`Floor 6:	${f6}`,
+		`Floor 7:	${f7}`
+	].join('\n')
+}
+
+function getWeights(apiData) {
+	return [
+		`**Total:**		${(apiData.data.weight + apiData.data.weight_overflow).toString().substr(0, 7)}`,
+		`**Skill:**		${(apiData.data.skills.weight + apiData.data.skills.weight_overflow).toString().substr(0, 7)}`,
+		`**Slayer:**	${(apiData.data.slayers.weight + apiData.data.slayers.weight_overflow).toString().substr(0, 7)}`,
+		`**Dungeons:**	${(apiData.data.dungeons.weight + apiData.data.dungeons.weight_overflow).toString().substr(0, 7)}`
+	].join('\n')
 }
