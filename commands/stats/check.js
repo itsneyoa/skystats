@@ -4,7 +4,7 @@ const fetch = require('node-fetch');
 
 module.exports = {
 	name: 'check',
-    aliases: ['c'],
+    aliases: ['c', 'stats'],
 	description: 'Gets metrics about a player',
 	execute(message, args) {
         if(message.channel.type === 'dm' && !args[0]){
