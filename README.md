@@ -57,5 +57,3 @@ node index.js
 ### Roadmap
 - [ ] Make reload work for aliases
     - Currently `-reload c` doesn't work wheras `-reload check` does
-- [ ] Add weight calculation
-    - Take from the guild checker
