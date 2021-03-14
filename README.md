@@ -55,4 +55,7 @@ node index.js
     - `Skills` respective skill level required for skill based roles
 
 ### Roadmap
-- Write roadmap
+- [ ] Make reload work for aliases
+    - Currently `-reload c` doesn't work wheras `-reload check` does
+- [ ] Add weight calculation
+    - Take from the guild checker
