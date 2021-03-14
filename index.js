@@ -28,8 +28,6 @@ client.on('message', async message => {
     const args = message.content.slice(config.discord.prefix.length).trim().split(/ +/);
     const commandName = args.shift().toLowerCase();
   
-    if (!client.commands.has(commandName)) return;
-
     const command = client.commands.get(commandName)
         || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
     if (!command) return;
