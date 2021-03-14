@@ -4,6 +4,7 @@ const package = require('../package.json');
 
 module.exports = {
 	name: 'help',
+    aliases: ['h', 'aaa'],
 	description: 'Gets information about the bot',
 	execute(message, args) {
 		message.channel.send(new Discord.MessageEmbed()

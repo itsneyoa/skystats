@@ -22,11 +22,16 @@ client.on('message', async message => {
     if (message.author.bot || !message.content.startsWith(config.discord.prefix)) return;
   
     const args = message.content.slice(config.discord.prefix.length).trim().split(/ +/g);
-    const command = args.shift().toLowerCase();
+    const commandName = args.shift().toLowerCase();
   
-    if (!client.commands.has(command)) return;
+    if (!client.commands.has(commandName)) return;
+
+    const command = client.commands.get(commandName)
+        || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+    if (!command) return;
+
     try {
-	    client.commands.get(command).execute(message, args);
+	    command.execute(message, args);
     } catch (error) {
 	    console.error(error);
 	    message.reply('Something went wrong, please try again in a few minutes.');
