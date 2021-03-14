@@ -1,0 +1,19 @@
+{
+    "discord": {
+        "token": "",
+        "apiKey": "",
+        "prefix": "-"
+    },
+    "requirements": {
+        "dungeons": {
+            "4": 26,
+            "5": 27,
+            "6": 30,
+            "7": 36
+        },
+        "skills": {
+            "taming": 50,
+            "alchemy": 50
+        }
+    }
+}
