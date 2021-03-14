@@ -66,7 +66,7 @@ module.exports = {
                         name: `Skills Weight: ${(apiData.data.skills.weight).toString().substr(0, 6)} + ${(apiData.data.skills.weight_overflow).toString().substr(0, 5)} Overflow (${(apiData.data.skills.weight + apiData.data.skills.weight_overflow).toString().substr(0, 6)} Total)`,
                         value: '```ruby\n' + [
                             `Mining     > Lvl: ${(apiData.data.skills.mining.level).toString().substr(0, 5)}     Weight: ${(apiData.data.skills.mining.weight).toString().substr(0, 5)}`,
-                            `Foraging   > Lvl: ${(apiData.data.skills.foraging.level).toString().substr(0, 5)}     Weight: ${(apiData.data.skills.foraging.weight).toString().substr(0, 5)}`,
+                            `Foraging   > Lvl: ${(apiData.data.skills.foraging.level).toString().substr(0, 5)}   Weight: ${(apiData.data.skills.foraging.weight).toString().substr(0, 5)}`,
                             `Enchanting > Lvl: ${(apiData.data.skills.enchanting.level).toString().substr(0, 5)} Weight: ${(apiData.data.skills.enchanting.weight).toString().substr(0, 5)}`,
                             `Farming    > Lvl: ${(apiData.data.skills.farming.level).toString().substr(0, 5)}    Weight: ${(apiData.data.skills.farming.weight).toString().substr(0, 5)}`,
                             `Combat     > Lvl: ${(apiData.data.skills.combat.level).toString().substr(0, 5)}     Weight: ${(apiData.data.skills.combat.weight).toString().substr(0, 5)}`,
@@ -78,9 +78,9 @@ module.exports = {
                     {
                         name: `Slayer Weight: ${(apiData.data.slayers.weight).toString().substr(0, 6)} + ${(apiData.data.slayers.weight_overflow).toString().substr(0, 5)} Overflow (${(apiData.data.slayers.weight + apiData.data.slayers.weight_overflow).toString().substr(0, 6)} Total)`,
                         value: '```ruby\n' + [
-                            `Revenant   > Exp: ${(apiData.data.slayers.bosses.revenant.experience).toString().substr(0, 5)}      Weight: ${(apiData.data.slayers.bosses.revenant.weight).toString().substr(0, 5)}`,
-                            `Tarantula  > Exp: ${(apiData.data.slayers.bosses.tarantula.experience).toString().substr(0, 5)}     Weight: ${(apiData.data.slayers.bosses.tarantula.weight).toString().substr(0, 5)}`,
-                            `Sven       > Exp: ${(apiData.data.slayers.bosses.sven.experience).toString().substr(0, 5)}          Weight: ${(apiData.data.slayers.bosses.sven.weight).toString().substr(0, 5)}`
+                            `Revenant   > Exp: ${apiData.data.slayers.bosses.revenant.experience}      Weight: ${(apiData.data.slayers.bosses.revenant.weight).toString().substr(0, 5)}`,
+                            `Tarantula  > Exp: ${apiData.data.slayers.bosses.tarantula.experience}     Weight: ${(apiData.data.slayers.bosses.tarantula.weight).toString().substr(0, 5)}`,
+                            `Sven       > Exp: ${apiData.data.slayers.bosses.sven.experience}          Weight: ${(apiData.data.slayers.bosses.sven.weight).toString().substr(0, 5)}`
                         ].join('\n') + '\n```'
                     },
                     {
