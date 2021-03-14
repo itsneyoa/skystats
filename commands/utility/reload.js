@@ -4,7 +4,7 @@ const config = require('../../config.json');
 
 module.exports = {
 	name: 'reload',
-    aliases: ['restart'],
+    aliases: ['restart', 'r'],
 	description: 'Reloads a command',
 	execute(message, args) {
         if (!isOwner(message.author.id)) return message.channel.send(
