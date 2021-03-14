@@ -7,8 +7,6 @@ module.exports = {
     aliases: ['we'],
     description: "Gets the weight of a player's profile",
     async execute(message, args) {
-        const apiData = await getApiData(ign);
-
         if (message.channel.type === 'dm' && !args[0]) {
             return message.channel.send(
                 new Discord.MessageEmbed()
