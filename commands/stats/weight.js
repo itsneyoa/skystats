@@ -6,7 +6,7 @@ module.exports = {
     name: 'weight',
     aliases: ['we'],
     description: "Gets the weight of a player's profile",
-    execute(message, args) {
+    async execute(message, args) {
         const apiData = await getApiData(ign);
 
         if (message.channel.type === 'dm' && !args[0]) {
