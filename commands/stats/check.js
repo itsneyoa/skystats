@@ -1,7 +1,6 @@
 const Discord = require('discord.js');
 const config = require('../../config.json');
 const fetch = require('node-fetch');
-const chalk = require('chalk');
 
 const yes = `<:yes:819295941621841970>`;
 const no = `<:no:819295822230716467>`;
