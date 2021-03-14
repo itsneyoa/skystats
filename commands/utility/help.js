@@ -14,10 +14,10 @@ module.exports = {
                 {
                     name: "Commands",
                     value: [
-                        `Check player: \`${config.discord.prefix}check [ign]\``,
-                        `Reload:  \`${config.discord.prefix}reload <command>`,
-                        `Ping:  \`${config.discord.prefix}ping`
-                        `Help: \`${config.discord.prefix}help\``
+                        `Check player: \`check [ign]\``,
+                        `Reload:  \`reload <command>\``,
+                        `Ping:  \`ping\``,
+                        `Help: \`help\``
                     ].join('\n'),
                     inline: true
                 },
@@ -25,7 +25,7 @@ module.exports = {
                     name: "Info",
                     value: [
                         `Prefix: \`${config.discord.prefix}\``,
-                        `Version: \`${package.version}\``
+                        `Version: \`${package.version}\``,
                         `Issues: [click here](https://github.com/itsneyoa/skystats/issues)`
                     ].join('\n'),
                     inline: true
