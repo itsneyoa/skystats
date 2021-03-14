@@ -1,11 +1,18 @@
 const Discord = require('discord.js');
 const fs = require('fs');
+const config = require('../../config.json');
 
 module.exports = {
 	name: 'reload',
     aliases: ['restart'],
 	description: 'Reloads a command',
 	execute(message, args) {
+        if (!isOwner    (message.author.id)) return message.channel.send(
+            new Discord.MessageEmbed()
+            .setDescription(`Sorry, you don't have permission to do this`)
+            .setColor('DC143C')
+        )
+
 		if (!args.length) return message.channel.send(
             new Discord.MessageEmbed()
             .setDescription(`You need to specify a command to reload`)
@@ -44,3 +51,7 @@ module.exports = {
         }
 	},
 };
+
+function isOwner(member){
+    return member == config.discord.ownerId;
+}
