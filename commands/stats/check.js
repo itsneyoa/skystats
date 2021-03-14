@@ -23,6 +23,8 @@ module.exports = {
 			var ign = args[0];
 		} // Gets IGN
 
+		ign = ign.replace(/\W/g, ''); // removes weird characters
+
 		message.react(loading);
 
 		fetch(`https://api.mojang.com/users/profiles/minecraft/${ign}`)
