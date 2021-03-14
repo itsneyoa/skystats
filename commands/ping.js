@@ -7,6 +7,18 @@ module.exports = {
     aliases: ['latency'],
 	description: 'Gets latency of the bot',
 	execute(message, args) {
-        message.channel.send(`🏓 Latency is ${Date.now() - message.createdTimestamp}ms`);
+		if(message.channel.type !== 'dm'){
+			return message.channel.send(
+				new Discord.MessageEmbed()
+				.setAuthor(`Pong!`)
+				.setDescription(`Latency is ${Date.now() - message.createdTimestamp}ms`)
+				.setColor(message.guild.me.displayHexColor)
+			)
+		}
+        message.channel.send(
+			new Discord.MessageEmbed()
+			.setAuthor(`Pong!`)
+			.setDescription(`Latency is ${Date.now() - message.createdTimestamp}ms`)
+		);
 	},
 };
