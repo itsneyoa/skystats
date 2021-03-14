@@ -5,12 +5,17 @@ const fs = require('fs');
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
+const commandFolders = fs.readdirSync('./commands');
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
-for (const file of commandFiles) {
-	const command = require(`./commands/${file}`);
-	client.commands.set(command.name, command);
+for (const folder of commandFolders) {
+	const commandFiles = fs.readdirSync(`./commands/${folder}`).filter(file => file.endsWith('.js'));
+	for (const file of commandFiles) {
+		const command = require(`./commands/${folder}/${file}`);
+		client.commands.set(command.name, command);
+	}
 }
+
 
 client.once('ready', () => {
     console.log(chalk.greenBright(`Logged in as ${client.user.username}!`));
@@ -20,7 +25,7 @@ client.once('ready', () => {
 client.on('message', async message => {
     if (message.author.bot || !message.content.startsWith(config.discord.prefix)) return;
   
-    const args = message.content.slice(config.discord.prefix.length).trim().split(/ +/g);
+    const args = message.content.slice(config.discord.prefix.length).trim().split(/ +/);
     const commandName = args.shift().toLowerCase();
   
     if (!client.commands.has(commandName)) return;
