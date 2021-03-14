@@ -55,5 +55,4 @@ node index.js
     - `Skills` respective skill level required for skill based roles
 
 ### Roadmap
-- [ ] Make reload work for aliases
-    - Currently `-reload c` doesn't work wheras `-reload check` does
+- [ ] Write roadmap
