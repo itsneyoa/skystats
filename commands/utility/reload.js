@@ -7,7 +7,7 @@ module.exports = {
     aliases: ['restart'],
 	description: 'Reloads a command',
 	execute(message, args) {
-        if (!isOwner    (message.author.id)) return message.channel.send(
+        if (!isOwner(message.author.id)) return message.channel.send(
             new Discord.MessageEmbed()
             .setDescription(`Sorry, you don't have permission to do this`)
             .setColor('DC143C')
