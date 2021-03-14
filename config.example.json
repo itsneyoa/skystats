@@ -2,7 +2,8 @@
     "discord": {
         "token": "",
         "apiKey": "",
-        "prefix": "-"
+        "prefix": "-",
+        "ownerId": ""
     },
     "requirements": {
         "dungeons": {
