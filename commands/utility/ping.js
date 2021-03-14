@@ -4,7 +4,7 @@ const fetch = require('node-fetch');
 
 module.exports = {
 	name: 'ping',
-    aliases: ['latency'],
+    aliases: ['lag', 'latency'],
 	description: 'Gets latency of the bot',
 	execute(message, args) {
 		if(message.channel.type !== 'dm'){
