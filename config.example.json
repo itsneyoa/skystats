@@ -6,15 +6,20 @@
         "ownerId": ""
     },
     "requirements": {
-        "dungeons": {
-            "f4": 26,
-            "f5": 27,
-            "f6": 30,
-            "f7": 36
+        "roles": {
+            "dungeons": {
+                "f4": 26,
+                "f5": 27,
+                "f6": 30,
+                "f7": 36
+            },
+            "skills": {
+                "taming": 50,
+                "alchemy": 50
+            }
         },
-        "skills": {
-            "taming": 50,
-            "alchemy": 50
+        "guild": {
+            "weight": 2750
         }
     }
 }

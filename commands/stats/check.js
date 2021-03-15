@@ -108,8 +108,8 @@ async function getTrueIgn(ign) {
 }
 
 function getSkillRoles(apiData) {
-	var taming = apiData.data.skills.taming.level == config.requirements.skills.taming;
-	var alchemy = apiData.data.skills.alchemy.level == config.requirements.skills.alchemy;
+	var taming = apiData.data.skills.taming.level == config.requirements.roles.skills.taming;
+	var alchemy = apiData.data.skills.alchemy.level == config.requirements.roles.skills.alchemy;
 	if(taming) taming = yes; else taming = no;
 	if(alchemy) alchemy = yes; else alchemy = no;
 	return [
@@ -119,10 +119,10 @@ function getSkillRoles(apiData) {
 }
 
 function getDungeonRoles(apiData) {
-	var f4 = apiData.data.dungeons.types.catacombs.level >= config.requirements.dungeons.f4;
-	var f5 = apiData.data.dungeons.types.catacombs.level >= config.requirements.dungeons.f5;
-	var f6 = apiData.data.dungeons.types.catacombs.level >= config.requirements.dungeons.f6;
-	var f7 = apiData.data.dungeons.types.catacombs.level >= config.requirements.dungeons.f7;
+	var f4 = apiData.data.dungeons.types.catacombs.level >= config.requirements.roles.dungeons.f4;
+	var f5 = apiData.data.dungeons.types.catacombs.level >= config.requirements.roles.dungeons.f5;
+	var f6 = apiData.data.dungeons.types.catacombs.level >= config.requirements.roles.dungeons.f6;
+	var f7 = apiData.data.dungeons.types.catacombs.level >= config.requirements.roles.dungeons.f7;
 	if(f4) f4 = yes; else f4 = no;
 	if(f5) f5 = yes; else f5 = no;
 	if(f6) f6 = yes; else f6 = no;
