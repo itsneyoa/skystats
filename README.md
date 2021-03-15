@@ -55,4 +55,13 @@ node index.js
     - `Skills` respective skill level required for skill based roles
 
 ### Roadmap
-- [ ] Write roadmap
+- [ ] `GuildCheck` command (`gc`,`gcheck`, `guild`)
+    - Check if user meets guild requirements
+- [ ] Scale bot up to work in multiple servers
+- [ ] More bot information
+    - Uptime
+    - Total commands used
+    - Unique users
+    - Servers
+    - etc
+- [ ] Make sure it's entirely usable in DMs
