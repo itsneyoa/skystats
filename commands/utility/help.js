@@ -31,9 +31,14 @@ module.exports = {
                     inline: true
                 }
             )
-            .setColor(message.guild.me.displayHexColor)
+            .setColor(getColor(message))
             .setFooter('Made by neyoa ❤')
             .setTimestamp()
         )
 	},
 };
+
+function getColor(message){
+    if(message.channel.type !== 'dm') return message.guild.me.displayHexColor;
+    return '1B1D1F'
+}
