@@ -18,7 +18,6 @@ for (const folder of commandFolders) {
 
 client.once('ready', () => {
     console.log(chalk.greenBright(`Logged in as ${client.user.username}!`));
-    client.user.setActivity('Hypixel API.', { type: 'WATCHING' });
   });
 
 client.on('message', async message => {
