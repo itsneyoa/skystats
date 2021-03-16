@@ -15,7 +15,7 @@ module.exports = {
                     name: "Stats",
                     value: [
                         `Maniacs check: \`check [ign]\``,
-                        `Guild check :  \`guilcheck [ign]\``,
+                        `Guild check :  \`guildcheck [ign]\``,
                         `Player weight:  \`weight [ign]\``,
                         `*If no ign is given, discord nick will be used*`
                     ].join('\n'),
