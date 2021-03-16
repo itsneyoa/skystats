@@ -64,4 +64,13 @@ node index.js
     - Unique users
     - Servers
     - etc
-- [ ] Make sure it's entirely usable in DMs
+- [x] Make sure it's entirely usable in DMs
+- [ ] Do some stuff with `.env`
+    - Persistant status
+    - Customisable stuff:
+        - Prefix
+        - Rank requirements
+        - Guild requirements
+        - Api key
+- [ ] Add `load` command to go with reload
+- [ ] If no args are passed to `reload`, reload everything
