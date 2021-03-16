@@ -12,12 +12,22 @@ module.exports = {
             .setTitle('Help!')
             .addFields(
                 {
-                    name: "Commands",
+                    name: "Stats",
                     value: [
-                        `Check player: \`check [ign]\``,
-                        `Reload:  \`reload <command>\``,
-                        `Ping:  \`ping\``,
-                        `Help: \`help\``
+                        `Maniacs check: \`check [ign]\``,
+                        `Guild check :  \`guilcheck [ign]\``,
+                        `Player weight:  \`weight [ign]\``,
+                        `*If no ign is given, discord nick will be used*`
+                    ].join('\n'),
+                    inline: true
+                },
+                {
+                    name: "Utility",
+                    value: [
+                        `Help: \`help\``,
+                        `Latency: \`ping\``,
+                        `Reload: \`reload <command>\``,
+                        `Status: \`status <type> <message>\``
                     ].join('\n'),
                     inline: true
                 },
