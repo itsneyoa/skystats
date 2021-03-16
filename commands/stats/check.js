@@ -4,7 +4,7 @@ const fetch = require('node-fetch');
 
 const yes = `<:yes:819295941621841970>`;
 const no = `<:no:819295822230716467>`;
-const loading = `819138970771652609`
+const loading = `819138970771652609`;
 
 module.exports = {
 	name: 'check',
