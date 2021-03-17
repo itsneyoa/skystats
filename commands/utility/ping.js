@@ -5,18 +5,24 @@ module.exports = {
     aliases: ['lag', 'latency'],
 	description: 'Gets latency of the bot',
 	execute(message, args) {
-		if(message.channel.type !== 'dm'){
-			return message.channel.send(
-				new Discord.MessageEmbed()
-				.setAuthor(`Pong!`)
-				.setDescription(`Latency is ${Date.now() - message.createdTimestamp}ms`)
-				.setColor(message.guild.me.displayHexColor)
-			)
-		}
-        message.channel.send(
+		message.channel.send(
 			new Discord.MessageEmbed()
-			.setAuthor(`Pong!`)
-			.setDescription(`Latency is ${Date.now() - message.createdTimestamp}ms`)
-		);
+			.setDescription(`Pinging...`)
+			.setColor('FF8C00')
+		).then(sent => {
+			sent.edit(
+				new Discord.MessageEmbed()
+				.setDescription([
+					`Websocket heartbeat: ${message.client.ws.ping}ms.`,
+					`Roundtrip latency: ${sent.createdTimestamp - message.createdTimestamp}ms`
+				].join('\n'))
+				.setColor('7CFC00')
+			)
+		})
 	},
 };
+
+function getColor(message){
+    if(message.channel.type !== 'dm') return message.guild.me.displayHexColor;
+    return '1B1D1F'
+}
