@@ -73,6 +73,10 @@ module.exports = {
 						`- Have guild invites privacy settings on low`,
 						`- Are able to accept the invite`
 					].join('\n'))
+					.addField('Roles:', [
+						`Dungeoneer: 	${getEmoji(apiData.data.dungeons.types.catacombs.level > config.requirements.guild.ranks.catacombs)}`,
+						`Skill Grinder:	${getEmoji(apiData.data.skills.average_skills > config.requirements.guild.ranks.skills)}`
+					].join('\n'))
 					.setAuthor(ign, `https://cravatar.eu/helmavatar/${ign}/600.png`, `http://sky.shiiyu.moe/stats/${ign}`)
 					.setTimestamp()
 			).then(message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error)))
@@ -108,4 +112,9 @@ async function getTrueIgn(ign) {
 	const response = await fetch(`https://api.mojang.com/users/profiles/minecraft/${ign}`);
 	const result = await response.json();
 	return result.name;
+}
+
+function getEmoji(input) {
+	if (input === true) return yes;
+	else return no;
 }

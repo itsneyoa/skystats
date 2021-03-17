@@ -19,7 +19,11 @@
             }
         },
         "guild": {
-            "weight": 2750
+            "weight": 2750,
+            "ranks": {
+                "catacombs": 35,
+                "skills": 40
+            }
         }
     }
 }
