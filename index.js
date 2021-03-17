@@ -3,6 +3,8 @@ const chalk = require('chalk');
 const config = require('./config.json');
 const fs = require('fs');
 
+const escapeRegex = str => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 const commandFolders = fs.readdirSync('./commands');
@@ -28,11 +30,13 @@ client.once('ready', () => {
 });
 
 client.on('message', async message => {
-    if (message.author.bot || !message.content.startsWith(config.discord.prefix)) return;
-  
-    const args = message.content.slice(config.discord.prefix.length).trim().split(/ +/);
+    const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(config.discord.prefix)})\\s*`);
+    if ((!prefixRegex.test(message.content)) || message.author.bot) return;
+
+    const [, matchedPrefix] = message.content.match(prefixRegex);
+    const args = message.content.slice(matchedPrefix.length).trim().split(/ +/);
     const commandName = args.shift().toLowerCase();
-  
+
     const command = client.commands.get(commandName)
         || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
     if (!command) return;
@@ -44,5 +48,5 @@ client.on('message', async message => {
 	    message.reply('Something went wrong, please try again in a few minutes.');
     }
   });
-  
+
   client.login(config.discord.token);
