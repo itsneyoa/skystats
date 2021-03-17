@@ -15,10 +15,17 @@ for (const folder of commandFolders) {
 	}
 }
 
+client.on("guildCreate", guild => {
+  console.log("Joined a new guild: " + guild.name);
+})
+
+client.on("guildDelete", guild => {
+  console.log("Left a guild: " + guild.name);
+})
 
 client.once('ready', () => {
     console.log(chalk.greenBright(`Logged in as ${client.user.username}!`));
-  });
+});
 
 client.on('message', async message => {
     if (message.author.bot || !message.content.startsWith(config.discord.prefix)) return;
