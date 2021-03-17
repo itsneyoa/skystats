@@ -62,12 +62,14 @@ node index.js
     - Unique users
     - Servers
     - etc
-- [ ] Do some stuff with `.env`
+- [ ] More features
     - Persistant status
-    - Customisable stuff:
+    - Customisable stuff (per guild):
         - Prefix
         - Rank requirements
         - Guild requirements
         - Api key
 - [ ] Add `load` command to go with reload
 - [ ] If no args are passed to `reload`, reload everything
+- [ ] Add the rest of the metrics for `player`
+- [ ] Add verification / name updating
