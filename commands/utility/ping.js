@@ -12,6 +12,7 @@ module.exports = {
 		).then(sent => {
 			sent.edit(
 				new Discord.MessageEmbed()
+				.setAuthor(`Pong!`)
 				.setDescription([
 					`Websocket heartbeat: ${message.client.ws.ping}ms.`,
 					`Roundtrip latency: ${sent.createdTimestamp - message.createdTimestamp}ms`
