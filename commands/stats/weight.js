@@ -82,9 +82,9 @@ module.exports = {
                     {
                         name: `Slayer Weight: ${(apiData.data.slayers.weight).toString().substr(0, 6)} + ${(apiData.data.slayers.weight_overflow).toString().substr(0, 5)} Overflow (${(apiData.data.slayers.weight + apiData.data.slayers.weight_overflow).toString().substr(0, 6)} Total)`,
                         value: '```ruby\n' + [
-                            `Revenant   > Exp: ${apiData.data.slayers.bosses.revenant.experience}      Weight: ${(apiData.data.slayers.bosses.revenant.weight).toString().substr(0, 5)}`,
-                            `Tarantula  > Exp: ${apiData.data.slayers.bosses.tarantula.experience}     Weight: ${(apiData.data.slayers.bosses.tarantula.weight).toString().substr(0, 5)}`,
-                            `Sven       > Exp: ${apiData.data.slayers.bosses.sven.experience}          Weight: ${(apiData.data.slayers.bosses.sven.weight).toString().substr(0, 5)}`
+                            `Revenant   > Exp: ${(apiData.data.slayers.bosses.revenant.experience).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}      Weight: ${(apiData.data.slayers.bosses.revenant.weight).toString().substr(0, 5)}`,
+                            `Tarantula  > Exp: ${(apiData.data.slayers.bosses.tarantula.experience).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}     Weight: ${(apiData.data.slayers.bosses.tarantula.weight).toString().substr(0, 5)}`,
+                            `Sven       > Exp: ${(apiData.data.slayers.bosses.sven.experience).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}          Weight: ${(apiData.data.slayers.bosses.sven.weight).toString().substr(0, 5)}`
                         ].join('\n') + '\n```'
                     },
                     {
