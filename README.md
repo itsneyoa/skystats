@@ -1,5 +1,5 @@
 # SkyStats
-> A discord.js bot written for [Skyblock Maniacs](https://discord.gg/hUp72YA5vW) to get key metrics of a player in Hypixel Skyblock.
+> A discord.js bot written for [Skyblock Maniacs](https://discord.gg/maniacs) to get key metrics of a player in Hypixel Skyblock.
 
 ### Table of Content
 
@@ -55,7 +55,6 @@ node index.js
     - `Skills` respective skill level required for skill based roles
 
 ### Roadmap
-- [ ] Allow mentioning people as a valid ign
 - [ ] Scale bot up to work in multiple servers
 - [ ] More bot information
     - Uptime
