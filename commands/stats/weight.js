@@ -65,40 +65,7 @@ module.exports = {
                 .setAuthor(ign, `https://cravatar.eu/helmavatar/${ign}/600.png`, `https://sky.shiiyu.moe/stats/${ign}`)
                 .setColor('7CFC00')
                 .setDescription(`${ign}'s weights for their **${apiData.data.name}** profile are **${(apiData.data.weight).toString().substr(0, 7)} + ${(apiData.data.weight_overflow).toString().substr(0, 5)} Overflow (${(apiData.data.weight + apiData.data.weight_overflow).toString().substr(0, 7)} Total)**`)
-                .addFields(
-                    {
-                        name: `Skills Weight: ${(apiData.data.skills.weight).toString().substr(0, 6)} + ${(apiData.data.skills.weight_overflow).toString().substr(0, 5)} Overflow (${(apiData.data.skills.weight + apiData.data.skills.weight_overflow).toString().substr(0, 6)} Total)`,
-                        value: '```ruby\n' + [
-                            `Mining     > Lvl: ${(apiData.data.skills.mining.level).toString().substr(0, 5)}     Weight: ${(apiData.data.skills.mining.weight).toString().substr(0, 5)}`,
-                            `Foraging   > Lvl: ${(apiData.data.skills.foraging.level).toString().substr(0, 5)}   Weight: ${(apiData.data.skills.foraging.weight).toString().substr(0, 5)}`,
-                            `Enchanting > Lvl: ${(apiData.data.skills.enchanting.level).toString().substr(0, 5)} Weight: ${(apiData.data.skills.enchanting.weight).toString().substr(0, 5)}`,
-                            `Farming    > Lvl: ${(apiData.data.skills.farming.level).toString().substr(0, 5)}    Weight: ${(apiData.data.skills.farming.weight).toString().substr(0, 5)}`,
-                            `Combat     > Lvl: ${(apiData.data.skills.combat.level).toString().substr(0, 5)}     Weight: ${(apiData.data.skills.combat.weight).toString().substr(0, 5)}`,
-                            `Fishing    > Lvl: ${(apiData.data.skills.fishing.level).toString().substr(0, 5)}    Weight: ${(apiData.data.skills.fishing.weight).toString().substr(0, 5)}`,
-                            `Alchemy    > Lvl: ${(apiData.data.skills.alchemy.level).toString().substr(0, 5)}    Weight: ${(apiData.data.skills.alchemy.weight).toString().substr(0, 5)}`,
-                            `Taming     > Lvl: ${(apiData.data.skills.taming.level).toString().substr(0, 5)}     Weight: ${(apiData.data.skills.taming.weight).toString().substr(0, 5)}`
-                        ].join('\n') + '\n```'
-                    },
-                    {
-                        name: `Slayer Weight: ${(apiData.data.slayers.weight).toString().substr(0, 6)} + ${(apiData.data.slayers.weight_overflow).toString().substr(0, 5)} Overflow (${(apiData.data.slayers.weight + apiData.data.slayers.weight_overflow).toString().substr(0, 6)} Total)`,
-                        value: '```ruby\n' + [
-                            `Revenant   > Exp: ${(apiData.data.slayers.bosses.revenant.experience).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}      Weight: ${(apiData.data.slayers.bosses.revenant.weight).toString().substr(0, 5)}`,
-                            `Tarantula  > Exp: ${(apiData.data.slayers.bosses.tarantula.experience).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}     Weight: ${(apiData.data.slayers.bosses.tarantula.weight).toString().substr(0, 5)}`,
-                            `Sven       > Exp: ${(apiData.data.slayers.bosses.sven.experience).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}          Weight: ${(apiData.data.slayers.bosses.sven.weight).toString().substr(0, 5)}`
-                        ].join('\n') + '\n```'
-                    },
-                    {
-                        name: `Dungeon Weight: ${(apiData.data.dungeons.weight).toString().substr(0, 6)} + ${(apiData.data.dungeons.weight_overflow).toString().substr(0, 5)} Overflow (${(apiData.data.dungeons.weight + apiData.data.dungeons.weight_overflow).toString().substr(0, 6)} Total)`,
-                        value: '```ruby\n' + [
-                            `Catabombs  > Lvl: ${(apiData.data.dungeons.types.catacombs.level).toString().substr(0, 5)}          Weight: ${(apiData.data.dungeons.types.catacombs.weight).toString().substr(0, 5)}`,
-                            `Healer     > Lvl: ${(apiData.data.dungeons.classes.healer.level).toString().substr(0, 5)}           Weight: ${(apiData.data.dungeons.classes.healer.weight).toString().substr(0, 5)}`,
-                            `Mage       > Lvl: ${(apiData.data.dungeons.classes.mage.level).toString().substr(0, 5)}             Weight: ${(apiData.data.dungeons.classes.mage.weight).toString().substr(0, 5)}`,
-                            `Berserker  > Lvl: ${(apiData.data.dungeons.classes.berserker.level).toString().substr(0, 5)}        Weight: ${(apiData.data.dungeons.classes.berserker.weight).toString().substr(0, 5)}`,
-                            `Archer     > Lvl: ${(apiData.data.dungeons.classes.archer.level).toString().substr(0, 5)}           Weight: ${(apiData.data.dungeons.classes.archer.weight).toString().substr(0, 5)}`,
-                            `Tank       > Lvl: ${(apiData.data.dungeons.classes.tank.level).toString().substr(0, 5)}             Weight: ${(apiData.data.dungeons.classes.tank.weight).toString().substr(0, 5)}`
-                        ].join('\n') + '\n```'
-                    }
-                )
+                .addField('Sorry!', 'This command is currently under partial maintainance')
                 .setTimestamp()
         ).then(message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error)))
     },
