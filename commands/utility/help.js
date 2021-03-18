@@ -17,22 +17,20 @@ module.exports = {
                     {
                         name: "Stats",
                         value: [
-                            `Maniacs check: \`check [ign]\``,
-                            `Guild check :  \`guildcheck [ign]\``,
-                            `Player weight:  \`weight [ign]\``,
-                            `Player stats: \`player [ign]\``
+                            'Maniacs check: `check [ign]`',
+                            'Guild check :  `guildcheck [ign]`',
+                            'Player weight:  `weight [ign]`',
+                            'Player stats: `player [ign]`'
                         ].join('\n'),
-                        inline: true
                     },
                     {
                         name: "Utility",
                         value: [
-                            `Help: \`help\``,
-                            `Latency: \`ping\``,
+                            `Help: \`help\` (\`h\`, \`info\`)`,
+                            `Latency: \`ping\` (\`lag\`, \`latency\`)`,
                             `Reload: \`reload <command>\``,
                             `Status: \`status <type> <message>\``
                         ].join('\n'),
-                        inline: true
                     },
                     {
                         name: "Info",
