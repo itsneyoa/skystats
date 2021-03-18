@@ -1,5 +1,5 @@
 {
-  "name": "sky-stats",
+  "name": "skystats",
   "version": "1.5.1",
   "description": "A discord.js bot to get key metrics of a player in Hypixel Skyblock",
   "main": "index.js",
