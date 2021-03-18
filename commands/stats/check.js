@@ -72,7 +72,7 @@ module.exports = {
 					inline: true
 				},
 				{
-					name: "Dungeon Carriers",
+					name: "Carriers",
 					value: getDungeonRoles(apiData),
 					inline: true
 				},
@@ -108,8 +108,8 @@ function getSkillRoles(apiData) {
 	if(taming) taming = yes; else taming = no;
 	if(alchemy) alchemy = yes; else alchemy = no;
 	return [
-		`Taming:	${taming}`,
-		`Alchemy:	${alchemy}`
+		`Levellers:	${taming}`,
+		`Brewers:	${alchemy}`
 	].join('\n');
 }
 
