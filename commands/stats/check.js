@@ -76,11 +76,6 @@ module.exports = {
 					value: getDungeonRoles(apiData),
 					inline: true
 				},
-				{
-					name: "Weights",
-					value: getWeights(apiData),
-					inline: true
-				}
 			)
 			.setColor('7CFC00')
 			.setTimestamp()
@@ -132,14 +127,5 @@ function getDungeonRoles(apiData) {
 		`Floor 5:	${f5}`,
 		`Floor 6:	${f6}`,
 		`Floor 7:	${f7}`
-	].join('\n')
-}
-
-function getWeights(apiData) {
-	return [
-		`**Total:**		${(apiData.data.weight + apiData.data.weight_overflow).toString().substr(0, 7)}`,
-		`**Skill:**		${(apiData.data.skills.weight + apiData.data.skills.weight_overflow).toString().substr(0, 7)}`,
-		`**Slayer:**	${(apiData.data.slayers.weight + apiData.data.slayers.weight_overflow).toString().substr(0, 7)}`,
-		`**Dungeons:**	${(apiData.data.dungeons.weight + apiData.data.dungeons.weight_overflow).toString().substr(0, 7)}`
 	].join('\n')
 }
