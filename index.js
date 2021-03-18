@@ -1,7 +1,9 @@
 const Discord = require('discord.js');
 const chalk = require('chalk');
-const config = require('./config.json');
 const fs = require('fs');
+
+delete require.cache[require.resolve('./config.json')];
+const config = require('./config.json');
 
 const escapeRegex = str => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
@@ -30,6 +32,9 @@ client.once('ready', () => {
 });
 
 client.on('message', async message => {
+    delete require.cache[require.resolve('./config.json')];
+    const config = require('./config.json');
+
     if (message.channel.type == 'dm') return;
 
     const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(config.discord.prefix)})\\s*`);
