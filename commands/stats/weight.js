@@ -58,7 +58,54 @@ module.exports = {
                 .setAuthor(ign, `https://cravatar.eu/helmavatar/${ign}/600.png`, `https://sky.shiiyu.moe/stats/${ign}`)
                 .setColor('7CFC00')
                 .setDescription(`${ign}'s weights for their **${apiData.data.name}** profile are **${(apiData.data.weight).toString().substr(0, 7)} + ${(apiData.data.weight_overflow).toString().substr(0, 5)} Overflow (${(apiData.data.weight + apiData.data.weight_overflow).toString().substr(0, 7)} Total)**`)
-                .addField('Sorry!', 'This command is currently under partial maintainance')
+                .addFields(
+                    {
+                        name: 'Skills',
+                        value: [
+                            `Mining:`,
+                            `Foraging:`,
+                            `Enchanting:`,
+                            `Farming:`,
+                            `Combat:`,
+                            `Fishing:`,
+                            `Alchemy:`,
+                            `Taming:`
+                        ].join('\n'),
+                        inline: true
+                    },
+                    {
+                        name: 'Level',
+                        value: [
+                            toFixed(apiData.data.skills.mining.level),
+                            toFixed(apiData.data.skills.foraging.level),
+                            toFixed(apiData.data.skills.enchanting.level),
+                            toFixed(apiData.data.skills.farming.level),
+                            toFixed(apiData.data.skills.combat.level),
+                            toFixed(apiData.data.skills.fishing.level),
+                            toFixed(apiData.data.skills.alchemy.level),
+                            toFixed(apiData.data.skills.taming.level)
+                        ].join('\n'),
+                        inline: true
+                    },
+                    {
+                        name: 'Weight',
+                        value: [
+                            toFixed(apiData.data.skills.mining.weight + apiData.data.skills.mining.weight_overflow),
+                            toFixed(apiData.data.skills.foraging.weight + apiData.data.skills.foraging.weight_overflow),
+                            toFixed(apiData.data.skills.enchanting.weight + apiData.data.skills.enchanting.weight_overflow),
+                            toFixed(apiData.data.skills.farming.weight + apiData.data.skills.farming.weight_overflow),
+                            toFixed(apiData.data.skills.combat.weight + apiData.data.skills.combat.weight_overflow),
+                            toFixed(apiData.data.skills.fishing.weight + apiData.data.skills.fishing.weight_overflow),
+                            toFixed(apiData.data.skills.alchemy.weight + apiData.data.skills.alchemy.weight_overflow),
+                            toFixed(apiData.data.skills.taming.weight + apiData.data.skills.taming.weight_overflow)
+                        ].join('\n'),
+                        inline: true
+                    },
+                    {
+                        name: 'Slayer + Dungeon weights',
+                        value: 'There are still being developed in the new format, please be patient'
+                    }
+                )
                 .setTimestamp()
         ).then(message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error)))
     },
@@ -81,4 +128,9 @@ async function getTrueIgn(ign) {
     const response = await fetch(`https://api.mojang.com/users/profiles/minecraft/${ign}`);
     const result = await response.json();
     return result.name;
+}
+
+function toFixed(num) {
+    var re = new RegExp('^-?\\d+(?:\.\\d{0,' + (2 || -1) + '})?');
+    return num.toString().match(re)[0];
 }
