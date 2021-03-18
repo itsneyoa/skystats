@@ -55,6 +55,7 @@ node index.js
     - `Skills` respective skill level required for skill based roles
 
 ### Roadmap
+- [ ] Allow mentioning people as a valid ign
 - [ ] Scale bot up to work in multiple servers
 - [ ] More bot information
     - Uptime
