@@ -56,7 +56,9 @@ module.exports = {
                     new Discord.MessageEmbed()
                         .setDescription(`${message.author}, I can't DM you! Make sure you have DMs enabled!`)
                         .setColor('DC143C')
-                )
+                ).then(() => {
+                    message.react(no);
+                })
             });
     },
 };
