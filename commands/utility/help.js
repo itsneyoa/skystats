@@ -1,6 +1,5 @@
 const Discord = require('discord.js');
 const config = require('../../config.json');
-const package = require('../../package.json');
 
 const yes = `819295941621841970`;
 const no = `819295822230716467`;
@@ -10,6 +9,9 @@ module.exports = {
     aliases: ['h', 'info'],
     description: 'Gets information about the bot',
     execute(message, args) {
+        delete require.cache[require.resolve('../../package.json')];
+        const package = require('../../package.json');
+
         message.author.send(
             new Discord.MessageEmbed()
                 .setTitle('SkyStats Help')
