@@ -14,7 +14,10 @@ module.exports = {
 		if (!args[0]) {
 			var ign = message.member.displayName;
 		} else {
-			var ign = args[0];
+			if(message.mentions.members.first()){
+				var ign = message.mentions.members.first().displayName;
+			}
+			else var ign = args[0];
 		} // Gets IGN
 
 		ign = ign.replace(/\W/g, ''); // removes weird characters

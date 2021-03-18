@@ -10,10 +10,13 @@ module.exports = {
     description: "Gets the weight of a player's profile",
     async execute(message, args) {
         if (!args[0]) {
-            var ign = message.member.displayName;
-        } else {
-            var ign = args[0];
-        } // Gets IGN
+			var ign = message.member.displayName;
+		} else {
+			if(message.mentions.members.first()){
+				var ign = message.mentions.members.first().displayName;
+			}
+			else var ign = args[0];
+		} // Gets IGN
 
         ign = ign.replace(/\W/g, ''); // removes weird characters
 

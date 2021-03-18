@@ -11,16 +11,13 @@ module.exports = {
 	aliases: ['gc', 'gcheck', 'guild'],
 	description: 'Tests if a player meets the requirements for a guild',
 	async execute(message, args) {
-		if (message.channel.type === 'dm' && !args[0]) {
-			return message.channel.send(
-				new Discord.MessageEmbed()
-					.setDescription(`To use this in DMs you need to specify a player`)
-					.setColor('DC143C')
-			)
-		} else if (!args[0]) {
+		if (!args[0]) {
 			var ign = message.member.displayName;
 		} else {
-			var ign = args[0];
+			if(message.mentions.members.first()){
+				var ign = message.mentions.members.first().displayName;
+			}
+			else var ign = args[0];
 		} // Gets IGN
 
 		ign = ign.replace(/\W/g, ''); // removes weird characters
