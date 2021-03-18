@@ -55,21 +55,17 @@ node index.js
     - `Skills` respective skill level required for skill based roles
 
 ### Roadmap
-- [ ] Scale bot up to work in multiple servers
+- [ ] Setup MongoDB for unique stuff in every guild:
+    - Prefix
+    - Rank requirements
+    - Guild requirements
+- [ ] Add the rest of the metrics for `player`
+    - This requires the normal Hypixel API instead of the facade
 - [ ] More bot information
     - Uptime
     - Total commands used
     - Unique users
     - Servers
     - etc
-- [ ] More features
-    - Persistant status
-    - Customisable stuff (per guild):
-        - Prefix
-        - Rank requirements
-        - Guild requirements
-        - Api key
-- [ ] Add `load` command to go with reload
-- [ ] If no args are passed to `reload`, reload everything
-- [ ] Add the rest of the metrics for `player`
 - [ ] Add verification / name updating
+    - Likewise, this requires the normal Hypixel API instead of the facade
