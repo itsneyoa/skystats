@@ -51,12 +51,12 @@ module.exports = {
         ).then(() => {
             message.react(yes);
         })
-        .catch(() => {
-            message.channel.send(
-                new Discord.MessageEmbed()
-                .setDescription(`${message.author}, I can't DM you! Make sure you have DMs enabled!`)
-                .setColor('DC143C')
-            )
-        });
+            .catch(() => {
+                message.channel.send(
+                    new Discord.MessageEmbed()
+                        .setDescription(`${message.author}, I can't DM you! Make sure you have DMs enabled!`)
+                        .setColor('DC143C')
+                )
+            });
     },
 };

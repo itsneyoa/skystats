@@ -22,7 +22,7 @@ module.exports = {
             var ign = args[0];
         } // Gets IGN
 
-		ign = ign.replace(/\W/g, ''); // removes weird characters
+        ign = ign.replace(/\W/g, ''); // removes weird characters
 
         message.react(loading);
 
@@ -98,20 +98,20 @@ module.exports = {
 };
 
 async function getUUID(ign) {
-	const response = await fetch(`https://api.mojang.com/users/profiles/minecraft/${ign}`);
+    const response = await fetch(`https://api.mojang.com/users/profiles/minecraft/${ign}`);
     const result = await response.json();
     const uuid = result.id;
-    return uuid.substr(0,8)+"-"+uuid.substr(8,4)+"-"+uuid.substr(12,4)+"-"+uuid.substr(16,4)+"-"+uuid.substr(20);
+    return uuid.substr(0, 8) + "-" + uuid.substr(8, 4) + "-" + uuid.substr(12, 4) + "-" + uuid.substr(16, 4) + "-" + uuid.substr(20);
 }
 
 async function getApiData(ign) {
-	const UUID = await getUUID(ign);
-	const response = await fetch(`https://hypixel-api.senither.com/v1/profiles/${UUID}/save?key=${config.discord.apiKey}`);
-	return await response.json();
+    const UUID = await getUUID(ign);
+    const response = await fetch(`https://hypixel-api.senither.com/v1/profiles/${UUID}/save?key=${config.discord.apiKey}`);
+    return await response.json();
 }
 
 async function getTrueIgn(ign) {
-	const response = await fetch(`https://api.mojang.com/users/profiles/minecraft/${ign}`);
+    const response = await fetch(`https://api.mojang.com/users/profiles/minecraft/${ign}`);
     const result = await response.json();
     return result.name;
 }

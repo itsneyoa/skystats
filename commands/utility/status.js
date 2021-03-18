@@ -15,11 +15,11 @@ module.exports = {
 
         if (!args.length) {
             return message.client.user.setActivity()
-            .then(message.channel.send(
-                new Discord.MessageEmbed()
-                .setDescription(`Status removed!`)
-                .setColor('7CFC00')
-            ))
+                .then(message.channel.send(
+                    new Discord.MessageEmbed()
+                        .setDescription(`Status removed!`)
+                        .setColor('7CFC00')
+                ))
         }
 
         const status = args[0].toUpperCase();
@@ -40,11 +40,11 @@ module.exports = {
         args.shift();
 
         message.client.user.setActivity(args.join(' '), { type: status })
-        .then(message.channel.send(
-            new Discord.MessageEmbed()
-            .setDescription(`Status successfully set to \`${status.charAt(0).toUpperCase() + status.slice(1).toLowerCase() + ' ' + args.join(' ')}\``)
-            .setColor('7CFC00')
-        ))
+            .then(message.channel.send(
+                new Discord.MessageEmbed()
+                    .setDescription(`Status successfully set to \`${status.charAt(0).toUpperCase() + status.slice(1).toLowerCase() + ' ' + args.join(' ')}\``)
+                    .setColor('7CFC00')
+            ))
     },
 };
 

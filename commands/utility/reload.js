@@ -33,7 +33,7 @@ module.exports = {
         commandFolders.forEach(folder => {
             const commandSubFolders = fs.readdirSync(`./commands/${folder}`);
             commandSubFolders.forEach(cmd => {
-                if(cmd == `${command.name}.js`) folderName = folder;
+                if (cmd == `${command.name}.js`) folderName = folder;
             });
         });
 
