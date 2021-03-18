@@ -1,6 +1,5 @@
 const Discord = require('discord.js');
 const fs = require('fs');
-const config = require('../../config.json');
 
 module.exports = {
     name: 'reload',
@@ -59,5 +58,8 @@ module.exports = {
 };
 
 function isOwner(member) {
+    delete require.cache[require.resolve('../../config.json')];
+    const config = require('../../config.json');
+    
     return member == config.discord.ownerId;
 }

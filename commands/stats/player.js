@@ -1,5 +1,4 @@
 const Discord = require('discord.js');
-const config = require('../../config.json')
 const fetch = require('node-fetch');
 
 const loading = `819138970771652609`
@@ -101,6 +100,9 @@ async function getUUID(ign) {
 }
 
 async function getApiData(ign) {
+    delete require.cache[require.resolve('../../config.json')];
+    const config = require('../../config.json');
+
     const UUID = await getUUID(ign);
     const response = await fetch(`https://hypixel-api.senither.com/v1/profiles/${UUID}/save?key=${config.discord.apiKey}`);
     return await response.json();

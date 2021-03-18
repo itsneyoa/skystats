@@ -49,6 +49,9 @@ module.exports = {
 };
 
 function isOwner(member) {
+    delete require.cache[require.resolve('../../config.json')];
+    const config = require('../../config.json');
+
     return member == config.discord.ownerId;
 }
 

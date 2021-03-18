@@ -1,5 +1,4 @@
 const Discord = require('discord.js');
-const config = require('../../config.json')
 const fetch = require('node-fetch');
 
 const yes = `<:yes:819295941621841970>`;
@@ -11,6 +10,9 @@ module.exports = {
 	aliases: ['gc', 'gcheck', 'guild'],
 	description: 'Tests if a player meets the requirements for a guild',
 	async execute(message, args) {
+		delete require.cache[require.resolve('../../config.json')];
+        const config = require('../../config.json');
+
 		if (!args[0]) {
 			var ign = message.member.displayName;
 		} else {
@@ -100,6 +102,9 @@ async function getUUID(ign) {
 }
 
 async function getApiData(ign) {
+	delete require.cache[require.resolve('../../config.json')];
+    const config = require('../../config.json');
+
 	const UUID = await getUUID(ign);
 	const response = await fetch(`https://hypixel-api.senither.com/v1/profiles/${UUID}/save?key=${config.discord.apiKey}`);
 	return await response.json();

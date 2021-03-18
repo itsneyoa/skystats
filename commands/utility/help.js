@@ -1,5 +1,4 @@
 const Discord = require('discord.js');
-const config = require('../../config.json');
 
 const yes = `819295941621841970`;
 const no = `819295822230716467`;
@@ -11,6 +10,9 @@ module.exports = {
     execute(message, args) {
         delete require.cache[require.resolve('../../package.json')];
         const package = require('../../package.json');
+
+        delete require.cache[require.resolve('../../config.json')];
+        const config = require('../../config.json');
 
         message.author.send(
             new Discord.MessageEmbed()
