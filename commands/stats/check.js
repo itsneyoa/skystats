@@ -7,7 +7,7 @@ const loading = `819138970771652609`;
 
 module.exports = {
 	name: 'check',
-	aliases: ['c', 'stats'],
+	aliases: ['c'],
 	description: 'Gets metrics about a player',
 	async execute(message, args) {
 		if (!args[0]) {
