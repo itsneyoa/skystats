@@ -101,10 +101,71 @@ module.exports = {
                         ].join('\n'),
                         inline: true
                     },
+
                     {
-                        name: 'Slayer + Dungeon weights',
-                        value: 'There are still being developed in the new format, please be patient'
-                    }
+                        name: 'Slayer',
+                        value: [
+                            `Revenant Horror:`,
+                            `Tarantula Broodfather:`,
+                            `Sven Packmaster:`,
+                        ].join('\n'),
+                        inline: true
+                    },
+                    {
+                        name: 'Experience',
+                        value: [
+                            (apiData.data.slayers.bosses.revenant.experience).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+                            (apiData.data.slayers.bosses.tarantula.experience).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+                            (apiData.data.slayers.bosses.sven.experience).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                        ].join('\n'),
+                        inline: true
+                    },
+                    {
+                        name: 'Weight',
+                        value: [
+                            toFixed(apiData.data.slayers.bosses.revenant.weight + apiData.data.slayers.bosses.revenant.weight_overflow),
+                            toFixed(apiData.data.slayers.bosses.tarantula.weight + apiData.data.slayers.bosses.tarantula.weight_overflow),
+                            toFixed(apiData.data.slayers.bosses.sven.weight + apiData.data.slayers.bosses.sven.weight_overflow)
+                        ].join('\n'),
+                        inline: true
+                    },
+
+                    {
+                        name: 'Dungeons',
+                        value: [
+                            `Catacombs:`,
+                            `Healer:`,
+                            `Mage:`,
+                            `Berserker:`,
+                            `Archer:`,
+                            `Tank:`
+                        ].join('\n'),
+                        inline: true
+                    },
+                    {
+                        name: 'Level',
+                        value: [
+                            toFixed(apiData.data.dungeons.types.catacombs.level),
+                            toFixed(apiData.data.dungeons.classes.healer.level),
+                            toFixed(apiData.data.dungeons.classes.mage.level),
+                            toFixed(apiData.data.dungeons.classes.berserker.level),
+                            toFixed(apiData.data.dungeons.classes.archer.level),
+                            toFixed(apiData.data.dungeons.classes.tank.level)
+                        ].join('\n'),
+                        inline: true
+                    },
+                    {
+                        name: 'Weight',
+                        value: [
+                            toFixed(apiData.data.dungeons.types.catacombs.weight + apiData.data.dungeons.types.catacombs.weight_overflow),
+                            toFixed(apiData.data.dungeons.classes.healer.weight + apiData.data.dungeons.classes.healer.weight_overflow),
+                            toFixed(apiData.data.dungeons.classes.mage.weight + apiData.data.dungeons.classes.mage.weight_overflow),
+                            toFixed(apiData.data.dungeons.classes.berserker.weight + apiData.data.dungeons.classes.berserker.weight_overflow),
+                            toFixed(apiData.data.dungeons.classes.archer.weight + apiData.data.dungeons.classes.archer.weight_overflow),
+                            toFixed(apiData.data.dungeons.classes.tank.weight + apiData.data.dungeons.classes.tank.weight_overflow)
+                        ].join('\n'),
+                        inline: true
+                    },
                 )
                 .setTimestamp()
         ).then(message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error)))
