@@ -22,8 +22,3 @@ module.exports = {
 		})
 	},
 };
-
-function getColor(message) {
-	if (message.channel.type !== 'dm') return message.guild.me.displayHexColor;
-	return '1B1D1F'
-}

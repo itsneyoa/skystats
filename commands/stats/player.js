@@ -9,14 +9,7 @@ module.exports = {
     aliases: ['pl', 'p'],
     description: "Gets key player metrics",
     async execute(message, args) {
-        if (message.channel.type === 'dm' && !args[0]) {
-            return message.channel.send(
-                new Discord.MessageEmbed()
-                    .setDescription(`To use this in DMs you need to specify a player`)
-                    .setColor('DC143C')
-                    .setTimestamp()
-            )
-        } else if (!args[0]) {
+        if (!args[0]) {
             var ign = message.member.displayName;
         } else {
             var ign = args[0];
