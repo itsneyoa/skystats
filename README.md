@@ -74,3 +74,7 @@ node index.js
     - Idle
     - AFK
     - Invisible
+- [ ] Add more information to check command
+    - Secrets
+    - Fastest S+ run for f7
+- [ ] Write a `CHANGELOG.md`
