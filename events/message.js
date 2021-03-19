@@ -1,3 +1,6 @@
+const Discord = require('discord.js')
+const fs = require('fs');
+
 const escapeRegex = str => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
 module.exports = {
@@ -5,10 +8,10 @@ module.exports = {
     async execute(message, client) {
 
         client.commands = new Discord.Collection();
-        const commandFolders = fs.readdirSync('../commands');
+        const commandFolders = fs.readdirSync('./commands');
 
         for (const folder of commandFolders) {
-            const commandFiles = fs.readdirSync(`../commands/${folder}`).filter(file => file.endsWith('.js'));
+            const commandFiles = fs.readdirSync(`./commands/${folder}`).filter(file => file.endsWith('.js'));
             for (const file of commandFiles) {
                 const command = require(`../commands/${folder}/${file}`);
                 client.commands.set(command.name, command);
