@@ -40,7 +40,7 @@ module.exports = {
                         name: "Fun",
                         value: [
                             'Hi: `hi` (`hello`)',
-                            'Skin: `skin [ign]` (`sk`, skull`, `head`)'
+                            'Skin: `skin [ign]` (`sk`, `skull`, `head`)'
                         ].join('\n'),
                     },
                     {
