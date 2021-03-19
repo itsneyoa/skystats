@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 
 module.exports = {
     name: 'hi',
-    aliases: ['hello', 'o/'],
+    aliases: ['hello'],
     description: 'Says hi!',
     execute(message, args) {
         return message.channel.send(
