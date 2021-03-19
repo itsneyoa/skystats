@@ -3,6 +3,7 @@ const Discord = require('discord.js');
 module.exports = {
     name: 'hi',
     aliases: ['hello'],
+    usage: 'hi',
     description: 'Says hi!',
     guildOnly: false,
     execute(message, args) {

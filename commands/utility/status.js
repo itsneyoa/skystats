@@ -4,6 +4,7 @@ const statuses = ["PLAYING", "LISTENING", "WATCHING", "COMPETING"];
 module.exports = {
     name: 'status',
     aliases: ['presence', 'setstatus'],
+    usage: 'status <statusType> <statusMessage>',
     description: 'Sets bot status',
     guildOnly: false,
     execute(message, args) {

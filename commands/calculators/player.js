@@ -6,6 +6,7 @@ const loading = `819138970771652609`
 module.exports = {
     name: 'player',
     aliases: ['p', 'stats'],
+    usage: 'player [ign]',
     description: "Gets key player metrics",
     guildOnly: false,
     async execute(message, args) {

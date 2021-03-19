@@ -4,6 +4,7 @@ const fs = require('fs');
 module.exports = {
     name: 'reload',
     aliases: ['restart', 'r'],
+    usage: 'reload <command>',
     description: 'Reloads a command',
     guildOnly: false,
     execute(message, args) {
