@@ -1,11 +1,10 @@
 const Discord = require('discord.js');
-const config = require('../../config.json')
 const statuses = ["PLAYING", "LISTENING", "WATCHING", "COMPETING"];
 
 module.exports = {
     name: 'status',
     aliases: ['presence', 'setstatus'],
-    description: 'Sets bot statys',
+    description: 'Sets bot status',
     execute(message, args) {
         if (!isOwner(message.author.id)) return message.channel.send(
             new Discord.MessageEmbed()
