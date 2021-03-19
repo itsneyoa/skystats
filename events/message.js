@@ -6,7 +6,6 @@ const escapeRegex = str => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 module.exports = {
     name: 'message',
     async execute(message, client) {
-
         client.commands = new Discord.Collection();
         const commandFolders = fs.readdirSync('./commands');
 
@@ -21,8 +20,6 @@ module.exports = {
         delete require.cache[require.resolve('../config.json')];
         const config = require('../config.json');
 
-        if (message.channel.type == 'dm') return;
-
         const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(config.discord.prefix)})\\s*`);
         if ((!prefixRegex.test(message.content)) || message.author.bot) return;
 
@@ -30,15 +27,27 @@ module.exports = {
         const args = message.content.slice(matchedPrefix.length).trim().split(/ +/);
         const commandName = args.shift().toLowerCase();
 
-        const command = client.commands.get(commandName)
-            || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+        const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+
         if (!command) return;
+
+        /*if (command.guildOnly && message.channel.type === 'dm') {
+            return message.channel.send(
+                new Discord.MessageEmbed()
+                .setDescription(`Sorry, I can't execute \`${command.name}\` inside of DMs`)
+                .setColor('DC143C')
+            );
+        }*/ if (message.channel.type === 'dm') return;
 
         try {
             command.execute(message, args);
         } catch (error) {
             console.error(error);
-            message.reply('Something went wrong, please try again in a few minutes.');
+            return message.channel.send(
+                new Discord.MessageEmbed()
+                .setDescription(`Something went wrong, please try again in a few minutes`)
+                .setColor('DC143C')
+            );
         }
     },
 };
