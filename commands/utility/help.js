@@ -7,6 +7,7 @@ module.exports = {
     name: 'help',
     aliases: ['h', 'info'],
     description: 'Gets information about the bot',
+    guildOnly: true,
     execute(message, args) {
         delete require.cache[require.resolve('../../package.json')];
         const package = require('../../package.json');

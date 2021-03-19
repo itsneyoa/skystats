@@ -9,6 +9,7 @@ module.exports = {
 	name: 'guildcheck',
 	aliases: ['gc', 'gcheck', 'guild'],
 	description: 'Tests if a player meets the requirements for a guild',
+	guildOnly: true,
 	async execute(message, args) {
 		delete require.cache[require.resolve('../../config.json')];
 		const config = require('../../config.json');

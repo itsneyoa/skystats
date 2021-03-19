@@ -5,6 +5,7 @@ module.exports = {
     name: 'status',
     aliases: ['presence', 'setstatus'],
     description: 'Sets bot status',
+    guildOnly: false,
     execute(message, args) {
         if (!isOwner(message.author.id)) return message.channel.send(
             new Discord.MessageEmbed()

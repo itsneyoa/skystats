@@ -7,6 +7,7 @@ module.exports = {
     name: 'weight',
     aliases: ['we'],
     description: "Gets the weight of a player's profile",
+    guildOnly: false,
     async execute(message, args) {
         if (!args[0]) {
             var ign = message.member.displayName;

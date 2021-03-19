@@ -7,6 +7,7 @@ module.exports = {
     name: 'player',
     aliases: ['p', 'stats'],
     description: "Gets key player metrics",
+    guildOnly: false,
     async execute(message, args) {
         if (!args[0]) {
             var ign = message.member.displayName;

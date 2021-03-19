@@ -5,6 +5,7 @@ module.exports = {
     name: 'reload',
     aliases: ['restart', 'r'],
     description: 'Reloads a command',
+    guildOnly: false,
     execute(message, args) {
         if (!isOwner(message.author.id)) return message.channel.send(
             new Discord.MessageEmbed()
