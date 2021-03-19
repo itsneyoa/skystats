@@ -31,9 +31,16 @@ module.exports = {
                         name: "Utility",
                         value: [
                             'Help: `help` (`h`, `info`)',
-                            'Latency: `ping\` (`lag`, `latency`)',
+                            'Latency: `ping` (`lag`, `latency`)',
                             'Reload: `reload <command>` (`r`, `reboot`)',
                             'Status: `status <type> <message>` (`presence`, `setstatus`)'
+                        ].join('\n'),
+                    },
+                    {
+                        name: "Fun",
+                        value: [
+                            'Hi: `hi` (`hello`)',
+                            'Skin: `skin [ign]` (`sk`, skull`, `head`)'
                         ].join('\n'),
                     },
                     {
