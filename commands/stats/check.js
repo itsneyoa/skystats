@@ -13,7 +13,7 @@ module.exports = {
 		if (!args[0]) {
 			var ign = message.member.displayName;
 		} else {
-			if(message.mentions.members.first()){
+			if (message.mentions.members.first()) {
 				var ign = message.mentions.members.first().displayName;
 			}
 			else var ign = args[0];
@@ -57,11 +57,11 @@ module.exports = {
 				.setTimestamp()
 		).then(message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error)))
 
-		if (apiData.data.dungeons == null){
+		if (apiData.data.dungeons == null) {
 			return message.channel.send(
 				new Discord.MessageEmbed()
-				.setDescription(`\`${ign}\` hasn't entered the catacombs`)
-				.setColor('DC143C')
+					.setDescription(`\`${ign}\` hasn't entered the catacombs`)
+					.setColor('DC143C')
 			)
 		}
 
@@ -161,18 +161,18 @@ function getOtherStuff(apiData) {
 	].join('\n')
 }
 
-function formatTime(time) {   
-    // Hours, minutes and seconds
-    var hrs = ~~(time / 3600);
-    var mins = ~~((time % 3600) / 60);
-    var secs = ~~time % 60;
+function formatTime(time) {
+	// Hours, minutes and seconds
+	var hrs = ~~(time / 3600);
+	var mins = ~~((time % 3600) / 60);
+	var secs = ~~time % 60;
 
-    // Output like "1:01" or "4:03:59" or "123:03:59"
-    var ret = "";
-    if (hrs > 0) {
-        ret += "" + hrs + ":" + (mins < 10 ? "0" : "");
-    }
-    ret += "" + mins + ":" + (secs < 10 ? "0" : "");
-    ret += "" + secs;
-    return ret;
+	// Output like "1:01" or "4:03:59" or "123:03:59"
+	var ret = "";
+	if (hrs > 0) {
+		ret += "" + hrs + ":" + (mins < 10 ? "0" : "");
+	}
+	ret += "" + mins + ":" + (secs < 10 ? "0" : "");
+	ret += "" + secs;
+	return ret;
 }

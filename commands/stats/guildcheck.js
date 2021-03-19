@@ -11,12 +11,12 @@ module.exports = {
 	description: 'Tests if a player meets the requirements for a guild',
 	async execute(message, args) {
 		delete require.cache[require.resolve('../../config.json')];
-        const config = require('../../config.json');
+		const config = require('../../config.json');
 
 		if (!args[0]) {
 			var ign = message.member.displayName;
 		} else {
-			if(message.mentions.members.first()){
+			if (message.mentions.members.first()) {
 				var ign = message.mentions.members.first().displayName;
 			}
 			else var ign = args[0];
@@ -103,7 +103,7 @@ async function getUUID(ign) {
 
 async function getApiData(ign) {
 	delete require.cache[require.resolve('../../config.json')];
-    const config = require('../../config.json');
+	const config = require('../../config.json');
 
 	const UUID = await getUUID(ign);
 	const response = await fetch(`https://hypixel-api.senither.com/v1/profiles/${UUID}/save?key=${config.discord.apiKey}`);
