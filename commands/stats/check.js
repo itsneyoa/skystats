@@ -57,6 +57,14 @@ module.exports = {
 				.setTimestamp()
 		).then(message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error)))
 
+		if (apiData.data.dungeons == null){
+			return message.channel.send(
+				new Discord.MessageEmbed()
+				.setDescription(`\`${ign}\` hasn't entered the catacombs`)
+				.setColor('DC143C')
+			)
+		}
+
 		return message.channel.send(
 			new Discord.MessageEmbed()
 				.setAuthor(ign, `https://cravatar.eu/helmavatar/${ign}/600.png`, `https://sky.shiiyu.moe/stats/${ign}`)
