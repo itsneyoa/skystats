@@ -23,7 +23,6 @@ Add commas to long numbers
 New command template
 ```
 const Discord = require('discord.js');
-const config = require('../../config.json');
 
 module.exports = {
     name: 'a',
@@ -33,4 +32,10 @@ module.exports = {
         
     },
 };
+```
+
+Reload config
+```
+delete require.cache[require.resolve('../../config.json')];
+const config = require('../../config.json');
 ```
