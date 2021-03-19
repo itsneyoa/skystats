@@ -18,7 +18,7 @@ module.exports = {
 
         return message.channel.send(
             new Discord.MessageEmbed()
-                .setThumbnail('https://cravatar.eu/helmavatar/neyoa/600.png')
+                .setThumbnail(`https://cravatar.eu/helmavatar/${ign}/600.png`)
                 .setColor('7CFC00')
         )
     },
