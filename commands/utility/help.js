@@ -7,18 +7,19 @@ const no = `819295822230716467`;
 module.exports = {
     name: 'help',
     aliases: ['h', 'info', `commands`],
+    usage: 'help [command]',
     description: 'Gets information about the bot',
     guildOnly: true,
     execute(message, args) {
-        delete require.cache[require.resolve('../../package.json')];
-        const package = require('../../package.json');
-
-        delete require.cache[require.resolve('../../config.json')];
-        const config = require('../../config.json');
-
-        const commandFolders = fs.readdirSync('./commands');
-
         if (!args.length) {
+            delete require.cache[require.resolve('../../package.json')];
+            const package = require('../../package.json');
+    
+            delete require.cache[require.resolve('../../config.json')];
+            const config = require('../../config.json');
+    
+            const commandFolders = fs.readdirSync('./commands');
+    
             let embed = new Discord.MessageEmbed()
                 .setTitle(`Help - ${message.client.user.username}`)
                 .setColor(message.guild.me.displayHexColor)
@@ -26,7 +27,7 @@ module.exports = {
                 .setTimestamp();
 
             for (const folder of commandFolders) {
-                let data = [];
+                let descriptions = [];
                 const commandFiles = fs.readdirSync(`./commands/${folder}`).filter(file => file.endsWith('.js'));
                 for (const file of commandFiles) {
                     const command = require(`../${folder}/${file}`);
@@ -34,9 +35,9 @@ module.exports = {
                     currentCommand.push(`\`${command.name.charAt(0).toUpperCase() + command.name.slice(1)}\``);
                     currentCommand.push('-');
                     currentCommand.push(command.description);
-                    data.push(currentCommand.join(' '));
+                    descriptions.push(currentCommand.join(' '));
                 }
-                embed.addField((folder.charAt(0).toUpperCase() + folder.slice(1)), data.join('\n'))
+                embed.addField((folder.charAt(0).toUpperCase() + folder.slice(1)), descriptions.join('\n'))
             }
 
             embed.addField('Info', [
@@ -60,7 +61,7 @@ module.exports = {
                         message.react(no);
                     })
                 });
-        }
+        } // all commands
 
         const name = args[0].toLowerCase();
         const command = commands.get(name) || commands.find(c => c.aliases && c.aliases.includes(name));
@@ -69,7 +70,15 @@ module.exports = {
             return message.reply('that\'s not a valid command!');
         }
 
-        data.push(`**Name:** ${command.name}`);
+        let embed = new Discord.MessageEmbed()
+                .setTitle(`Help - ${command.name}`)
+                .setColor(message.guild.me.displayHexColor)
+                .setFooter('Made by neyoa ❤')
+                .setTimestamp();
+
+        let data = [];
+
+        embed.setDescription()
 
         if (command.aliases) data.push(`**Aliases:** ${command.aliases.join(', ')}`);
         if (command.description) data.push(`**Description:** ${command.description}`);
