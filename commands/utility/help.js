@@ -19,16 +19,19 @@ module.exports = {
         const commandFolders = fs.readdirSync('./commands');
 
         if (!args.length) {
-            let embed = new Discord.MessageEmbed();
-            embed.setTitle(`Help - ${message.client.user.username}`)
-            
+            let embed = new Discord.MessageEmbed()
+                .setTitle(`Help - ${message.client.user.username}`)
+                .setColor(message.guild.me.displayHexColor)
+                .setFooter('Made by neyoa ❤')
+                .setTimestamp();
+
             for (const folder of commandFolders) {
                 let data = [];
                 const commandFiles = fs.readdirSync(`./commands/${folder}`).filter(file => file.endsWith('.js'));
                 for (const file of commandFiles) {
                     const command = require(`../${folder}/${file}`);
                     let currentCommand = [];
-                    currentCommand.push(command.name);
+                    currentCommand.push(`\`${command.name.charAt(0).toUpperCase() + command.name.slice(1)}\``);
                     currentCommand.push('-');
                     currentCommand.push(command.description);
                     data.push(currentCommand.join(' '));
@@ -36,14 +39,26 @@ module.exports = {
                 embed.addField((folder.charAt(0).toUpperCase() + folder.slice(1)), data.join('\n'))
             }
 
+            embed.addField('Info', [
+                `Prefix: \`${config.discord.prefix}\``,
+                `Version: \`${package.version}\``,
+                `Issues: [click here](https://github.com/itsneyoa/skystats/issues)`,
+                `Server: \`${message.guild.name}\``,
+                `Channel: ${message.channel}`
+            ].join('\n'))
+
             return message.author.send(embed)
                 .then(() => {
-                    if (message.channel.type === 'dm') return;
-                    message.reply('I\'ve sent you a DM with all my commands!');
+                    message.react(yes);
                 })
-                .catch(error => {
-                    console.error(`Could not send help DM to ${message.author.tag}.\n`, error);
-                    message.reply('it seems like I can\'t DM you! Do you have DMs disabled?');
+                .catch(() => {
+                    message.channel.send(
+                        new Discord.MessageEmbed()
+                            .setDescription(`${message.author}, I can't DM you! Make sure you have DMs enabled!`)
+                            .setColor('DC143C')
+                    ).then(() => {
+                        message.react(no);
+                    })
                 });
         }
 
