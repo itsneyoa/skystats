@@ -1,4 +1,5 @@
 # SkyStats
+
 > A discord.js bot written for [Skyblock Maniacs](https://discord.gg/maniacs) to get key metrics of a player in Hypixel Skyblock.
 
 ### Table of Content
@@ -8,10 +9,12 @@
 - [Configuration](#configuration)
 - [Roadmap](#roadmap)
 
+
 ### Prerequisites
 - Git
 - NodeJS >= 14
 - Yarn >= 1.2
+
 
 ### Installation & Setup
 
@@ -42,6 +45,7 @@ node index.js
 
 ### Configuration
 
+
 - `Discord` contains all the keys, tokens, IDs etc
     - `Token` is the token for the discord bot.
         - If you don't already have a Discord App, you can [create a new app](https://discord.com/developers), then convert the app to a Discord bot, and then get your Discord bot token on the "Bot" page.
@@ -54,7 +58,9 @@ node index.js
     - `Dungeons` catacombs level for carrier roles
     - `Skills` respective skill level required for skill based roles
 
+
 ### Roadmap
+
 - [ ] Setup MongoDB for unique stuff in every guild:
     - Prefix
     - Rank requirements
