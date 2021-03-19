@@ -69,9 +69,4 @@ node index.js
     - etc
 - [ ] Add verification / name updating
     - Likewise, this requires the normal Hypixel API instead of the facade
-- [ ] Add command to set visability
-    - Online
-    - Idle
-    - AFK
-    - Invisible
 - [ ] Write a `CHANGELOG.md`
