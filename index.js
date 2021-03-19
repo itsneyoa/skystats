@@ -1,5 +1,4 @@
 const Discord = require('discord.js');
-const chalk = require('chalk');
 const fs = require('fs');
 
 delete require.cache[require.resolve('./config.json')];
