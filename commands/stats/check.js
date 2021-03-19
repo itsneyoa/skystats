@@ -72,6 +72,11 @@ module.exports = {
 						value: getDungeonRoles(apiData),
 						inline: true
 					},
+					{
+						name: "Other",
+						value: getOtherStuff(apiData),
+						inline: true
+					}
 				)
 				.setColor('7CFC00')
 				.setTimestamp()
@@ -131,6 +136,35 @@ function getDungeonRoles(apiData) {
 		`Floor 4:	${f4}`,
 		`Floor 5:	${f5}`,
 		`Floor 6:	${f6}`,
-		`Floor 7:	${f7}`
+		`Floor 7:	${f7}`,
 	].join('\n')
+}
+
+function getOtherStuff(apiData) {
+	var f7splustime;
+	try {
+		f7splustime = formatTime(apiData.data.dungeons.types.catacombs.fastest_time_s_plus.tier_7.seconds);
+	} catch {
+		f7splustime = `N/A`;
+	}
+	return [
+		`Secrets: \`${apiData.data.dungeons.secrets_found.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}\``,
+		`Best F7 S+: \`${f7splustime}\``
+	].join('\n')
+}
+
+function formatTime(time) {   
+    // Hours, minutes and seconds
+    var hrs = ~~(time / 3600);
+    var mins = ~~((time % 3600) / 60);
+    var secs = ~~time % 60;
+
+    // Output like "1:01" or "4:03:59" or "123:03:59"
+    var ret = "";
+    if (hrs > 0) {
+        ret += "" + hrs + ":" + (mins < 10 ? "0" : "");
+    }
+    ret += "" + mins + ":" + (secs < 10 ? "0" : "");
+    ret += "" + secs;
+    return ret;
 }
