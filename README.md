@@ -70,3 +70,4 @@ node index.js
 - [ ] Add verification / name updating
     - Likewise, this requires the normal Hypixel API instead of the facade
 - [ ] Write a `CHANGELOG.md`
+- [ ] Make `help` command dynamic
