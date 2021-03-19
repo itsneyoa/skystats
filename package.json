@@ -1,13 +1,13 @@
 {
-  "name": "skystats",
-  "version": "1.5.2",
-  "description": "A discord.js bot to get key metrics of a player in Hypixel Skyblock",
-  "main": "index.js",
-  "author": "neyoa",
-  "license": "MIT",
-  "dependencies": {
-    "chalk": "^4.1.0",
-    "discord.js": "^12.5.1",
-    "node-fetch": "^2.6.1"
-  }
+    "name": "skystats",
+    "version": "1.5.3",
+    "description": "A discord.js bot to get key metrics of a player in Hypixel Skyblock",
+    "main": "index.js",
+    "author": "neyoa",
+    "license": "MIT",
+    "dependencies": {
+        "chalk": "^4.1.0",
+        "discord.js": "^12.5.1",
+        "node-fetch": "^2.6.1"
+    }
 }
