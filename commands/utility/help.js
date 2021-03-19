@@ -5,7 +5,7 @@ const no = `819295822230716467`;
 
 module.exports = {
     name: 'help',
-    aliases: ['h', 'info'],
+    aliases: ['h', 'info', `commands`],
     description: 'Gets information about the bot',
     guildOnly: true,
     execute(message, args) {
