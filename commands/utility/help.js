@@ -21,7 +21,7 @@ module.exports = {
             const commandFolders = fs.readdirSync('./commands');
     
             let embed = new Discord.MessageEmbed()
-                .setTitle(`Help - ${message.client.user.username}`)
+                .setAuthor(`Help - ${message.client.user.username}`, message.client.user.avatarURL())
                 .setColor(message.guild.me.displayHexColor)
                 .setFooter('Made by neyoa ❤')
                 .setTimestamp();
@@ -64,27 +64,40 @@ module.exports = {
         } // all commands
 
         const name = args[0].toLowerCase();
-        const command = commands.get(name) || commands.find(c => c.aliases && c.aliases.includes(name));
+        const command = message.client.commands.get(name) || message.client.commands.find(c => c.aliases && c.aliases.includes(name));
 
         if (!command) {
-            return message.reply('that\'s not a valid command!');
+            return message.channel.send(
+                new Discord.MessageEmbed()
+                .setDescription(`\`${name}\` isn't a valid command`)
+                .setColor('DC143C')
+            );
         }
 
         let embed = new Discord.MessageEmbed()
-                .setTitle(`Help - ${command.name}`)
+                .setAuthor(`Help - ${command.name.charAt(0).toUpperCase() + command.name.slice(1)}`, message.client.user.avatarURL())
                 .setColor(message.guild.me.displayHexColor)
                 .setFooter('Made by neyoa ❤')
                 .setTimestamp();
 
-        let data = [];
+        embed.setDescription([
+            `*${command.description}*`,
+            `Usage: \`${command.usage}\``
+        ])
+        embed.addField('Aliases', `\`${command.aliases.join('\n')}\``, true)
 
-        embed.setDescription()
-
-        if (command.aliases) data.push(`**Aliases:** ${command.aliases.join(', ')}`);
-        if (command.description) data.push(`**Description:** ${command.description}`);
-
-        message.channel.send(data, { split: true });
-
-
+        return message.author.send(embed)
+                .then(() => {
+                    message.react(yes);
+                })
+                .catch(() => {
+                    message.channel.send(
+                        new Discord.MessageEmbed()
+                            .setDescription(`${message.author}, I can't DM you! Make sure you have DMs enabled!`)
+                            .setColor('DC143C')
+                    ).then(() => {
+                        message.react(no);
+                    })
+                }); // individual commands
     },
 };
