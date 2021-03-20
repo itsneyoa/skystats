@@ -99,7 +99,7 @@ module.exports = {
                 .setAuthor(guildData.guild.name)
                 .setTitle('Finished scanning')
                 .setColor('7CFC00')
-                .setFooter(`${c} members scanned in ${formatTime(timeTaken)}`)
+                .setFooter(`${guildData.guild.members.length} members scanned in ${formatTime(timeTaken)}`)
                 .setTimestamp()
         ).then(message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error)))
 
