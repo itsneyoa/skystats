@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const fetch = require('node-fetch')
+const sleepTime = 500;
 
 const loading = `819138970771652609`;
 
@@ -10,9 +11,6 @@ module.exports = {
     description: 'Scans a guild, checking all members total skill experience',
     guildOnly: true,
     async execute(message, args) {
-        delete require.cache[require.resolve('../../config.json')];
-        const config = require('../../config.json');
-
         if (!isOwner(message.author.id)) return message.channel.send(
             new Discord.MessageEmbed()
                 .setDescription(`Sorry, you don't have permission to do this`)
@@ -41,65 +39,71 @@ module.exports = {
             ).then(message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error)))
         }
 
-        var members = [];
+        var memberUUIDs = [];
 
         guildData.guild.members.forEach(member => {
             let uuid = member.uuid;
             uuid = uuid.substr(0, 8) + "-" + uuid.substr(8, 4) + "-" + uuid.substr(12, 4) + "-" + uuid.substr(16, 4) + "-" + uuid.substr(20);
-            members.push(uuid);
+            memberUUIDs.push(uuid);
         });
+
+        const startTime = Date.now();
+
+        var users = [];
+
+        var c = 0;
 
         const sentEmbed = await message.channel.send(
             new Discord.MessageEmbed()
                 .setTitle(`${guildData.guild.name} Found!`)
                 .setDescription(`Scanning guild - **This will take a while**`)
                 .setColor('FF8C00')
+                .setFooter(`Scanned ${c}/${guildData.guild.members.length}`)
                 .setTimestamp()
         )
 
-        const startTime = Date.now();
+        c++;
 
-        var kicking = [];
-        var apiOff = [];
+        while(memberUUIDs.length != 0){
+            for (uuid of memberUUIDs) {
+                console.log(c);
+                try {
+                    const skyblockData = await getSkyblockData(uuid);
+    
+                    try {
+                        users.push({ username: skyblockData.data.username, exp: skyblockData.data.weight.toString().substr(0, 9), uuid: uuid });
+                        memberUUIDs.shift();
+                    } catch {
+                        console.log(`Error with UUID ${uuid}`);
+                    }
 
-        var c = 1;
-        for (uuid of members) {
-            try{
-                const skyblockData = await getSkyblockData(uuid);
-                if (skyblockData.data.skills.apiEnabled == false) apiOff.push(skyblockData.data.username);
-                else if (!((skyblockData.data.weight + skyblockData.data.weight_overflow) >= config.requirements.guild.weight)) kicking.push(skyblockData.data.username);
-            } catch(e) {
-                console.log(e);
+                } catch (e) {
+                    console.log(e);
+                }
+
+                sentEmbed.edit(
+                    new Discord.MessageEmbed()
+                        .setTitle(`${guildData.guild.name} Found!`)
+                        .setDescription(`Scanning guild - **This will take a while**`)
+                        .setColor('FF8C00')
+                        .setFooter(`Scanned ${c}/${guildData.guild.members.length}`)
+                        .setTimestamp(startTime)
+                ).then(c++).then(sleep(sleepTime));
             }
-
-            sentEmbed.edit(
-                new Discord.MessageEmbed()
-                    .setTitle(`${guildData.guild.name} Found!`)
-                    .setDescription(`Scanning guild - **This will take a while**`)
-                    .setColor('FF8C00')
-                    .setFooter(`${c}/${members.length}`)
-                    .setTimestamp()
-            ).then(c++)
-
-            sleep(1000);
         }
 
-        if (!kicking.length) kicking.push('No-one :)');
-        if (!apiOff.length) apiOff.push('No-one :)')
-
         const timeTaken = Math.floor((Date.now() - startTime) / 1000); //in seconds
-
 
         sentEmbed.edit(
             new Discord.MessageEmbed()
                 .setAuthor(guildData.guild.name)
                 .setTitle('Finished scanning')
-                .addField(`Below requirements:`, kicking.join('\n'), true)
-                .addField(`Api disabled:`, apiOff.join('\n'), true)
                 .setColor('7CFC00')
-                .setFooter(`${c} members found in ${formatTime(timeTaken)}`)
+                .setFooter(`${c} members scanned in ${formatTime(timeTaken)}`)
                 .setTimestamp()
         ).then(message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error)))
+
+        console.log(users);
     },
 };
 
@@ -135,17 +139,17 @@ function sleep(milliseconds) {
 }
 
 function formatTime(time) {
-	// Hours, minutes and seconds
-	var hrs = ~~(time / 3600);
-	var mins = ~~((time % 3600) / 60);
-	var secs = ~~time % 60;
+    // Hours, minutes and seconds
+    var hrs = ~~(time / 3600);
+    var mins = ~~((time % 3600) / 60);
+    var secs = ~~time % 60;
 
-	// Output like "1:01" or "4:03:59" or "123:03:59"
-	var ret = "";
-	if (hrs > 0) {
-		ret += "" + hrs + ":" + (mins < 10 ? "0" : "");
-	}
-	ret += "" + mins + ":" + (secs < 10 ? "0" : "");
-	ret += "" + secs;
-	return ret;
+    // Output like "1:01" or "4:03:59" or "123:03:59"
+    var ret = "";
+    if (hrs > 0) {
+        ret += "" + hrs + ":" + (mins < 10 ? "0" : "");
+    }
+    ret += "" + mins + ":" + (secs < 10 ? "0" : "");
+    ret += "" + secs;
+    return ret;
 }
