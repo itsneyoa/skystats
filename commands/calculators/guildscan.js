@@ -82,6 +82,9 @@ module.exports = {
             sleep(1000);
         }
 
+        if (!kicking.length) kicking.push('No-one :)');
+        if (!apiOff.length) apiOff.push('No-one :)')
+
         sentEmbed.edit(
             new Discord.MessageEmbed()
                 .setTitle('Finished scanning')
