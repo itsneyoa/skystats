@@ -22,6 +22,7 @@ module.exports = {
     
             let embed = new Discord.MessageEmbed()
                 .setAuthor(`Help - ${message.client.user.username}`, message.client.user.avatarURL())
+                .setDescription(`For more information run \`help [command]\``)
                 .setColor(message.guild.me.displayHexColor)
                 .setFooter('Made by neyoa ❤')
                 .setTimestamp();
