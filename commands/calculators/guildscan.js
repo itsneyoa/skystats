@@ -62,9 +62,13 @@ module.exports = {
 
         var c = 1;
         for (uuid of members) {
-            const skyblockData = await getSkyblockData(uuid);
-            if (skyblockData.data.skills.apiEnabled == false) apiOff.push(skyblockData.data.username);
-            else if (!((skyblockData.data.weight + skyblockData.data.weight_overflow) >= config.requirements.guild.weight)) kicking.push(skyblockData.data.username);
+            try{
+                const skyblockData = await getSkyblockData(uuid);
+                if (skyblockData.data.skills.apiEnabled == false) apiOff.push(skyblockData.data.username);
+                else if (!((skyblockData.data.weight + skyblockData.data.weight_overflow) >= config.requirements.guild.weight)) kicking.push(skyblockData.data.username);
+            } catch(e) {
+                console.log(e);
+            }
 
             sentEmbed.edit(
                 new Discord.MessageEmbed()
