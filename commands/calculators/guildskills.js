@@ -4,10 +4,10 @@ const fetch = require('node-fetch')
 const loading = `819138970771652609`;
 
 module.exports = {
-    name: 'guildscan',
-    aliases: ['gsc', 'scanguild'],
-    usage: 'guildscan <guild>',
-    description: 'Scans a guild, checking all members against requirements',
+    name: 'guildskills',
+    aliases: ['gsk', 'guildsk'],
+    usage: 'guildskills <guild>',
+    description: 'Scans a guild, checking all members total skill experience',
     guildOnly: true,
     async execute(message, args) {
         delete require.cache[require.resolve('../../config.json')];
