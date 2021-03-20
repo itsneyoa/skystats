@@ -105,6 +105,10 @@ module.exports = {
 
         const convertedCSV = ConvertToCSV(JSON.stringify(users));
         fs.writeFileSync('./output.csv', convertedCSV, 'utf-8');
+
+        return message.reply(
+            new Discord.MessageAttachment('./output.csv')
+        )
     },
 };
 
