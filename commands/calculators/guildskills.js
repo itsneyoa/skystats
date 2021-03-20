@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const fetch = require('node-fetch')
+const fs = require('fs')
 const sleepTime = 500;
 
 const loading = `819138970771652609`;
@@ -66,7 +67,6 @@ module.exports = {
 
         while(memberUUIDs.length != 0){
             for (uuid of memberUUIDs) {
-                console.log(c);
                 try {
                     const skyblockData = await getSkyblockData(uuid);
     
@@ -103,7 +103,8 @@ module.exports = {
                 .setTimestamp()
         ).then(message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error)))
 
-        console.log(users);
+        const convertedCSV = ConvertToCSV(JSON.stringify(users));
+        fs.writeFileSync('./output.csv', convertedCSV, 'utf-8');
     },
 };
 
@@ -152,4 +153,22 @@ function formatTime(time) {
     ret += "" + mins + ":" + (secs < 10 ? "0" : "");
     ret += "" + secs;
     return ret;
+}
+
+function ConvertToCSV(objArray) {
+    var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
+    var str = 'Username,Exp,uuid\n';
+
+    for (var i = 0; i < array.length; i++) {
+        var line = '';
+        for (var index in array[i]) {
+            if (line != '') line += ','
+
+            line += array[i][index];
+        }
+
+        str += line + '\r\n';
+    }
+
+    return str;
 }
