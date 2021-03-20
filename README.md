@@ -67,7 +67,7 @@ node index.js
     - Guild requirements
 - [ ] Add the rest of the metrics for `player`
     - This requires the normal Hypixel API instead of the facade
-- [ ] More bot information
+- [ ] Make a `stats` command
     - Uptime
     - Total commands used
     - Unique users
@@ -76,3 +76,4 @@ node index.js
 - [ ] Add verification / name updating
     - Likewise, this requires the normal Hypixel API instead of the facade
 - [ ] Write a `CHANGELOG.md`
+- [ ] Add logging to a discord channel given in config
