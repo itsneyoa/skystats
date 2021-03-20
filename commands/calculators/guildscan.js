@@ -57,6 +57,8 @@ module.exports = {
                 .setTimestamp()
         )
 
+        const startTime = Date.now();
+
         var kicking = [];
         var apiOff = [];
 
@@ -85,13 +87,17 @@ module.exports = {
         if (!kicking.length) kicking.push('No-one :)');
         if (!apiOff.length) apiOff.push('No-one :)')
 
+        const timeTaken = Math.floor((Date.now() - startTime) / 1000); //in seconds
+
+
         sentEmbed.edit(
             new Discord.MessageEmbed()
+                .setAuthor(guildData.guild.name)
                 .setTitle('Finished scanning')
                 .addField(`Below requirements:`, kicking.join('\n'), true)
                 .addField(`Api disabled:`, apiOff.join('\n'), true)
                 .setColor('7CFC00')
-                .setFooter(guildData.guild.name)
+                .setFooter(`${c} members found in ${formatTime(timeTaken)}`)
                 .setTimestamp()
         ).then(message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error)))
     },
@@ -126,4 +132,20 @@ function sleep(milliseconds) {
     do {
         currentDate = Date.now();
     } while (currentDate - date < milliseconds);
+}
+
+function formatTime(time) {
+	// Hours, minutes and seconds
+	var hrs = ~~(time / 3600);
+	var mins = ~~((time % 3600) / 60);
+	var secs = ~~time % 60;
+
+	// Output like "1:01" or "4:03:59" or "123:03:59"
+	var ret = "";
+	if (hrs > 0) {
+		ret += "" + hrs + ":" + (mins < 10 ? "0" : "");
+	}
+	ret += "" + mins + ":" + (secs < 10 ? "0" : "");
+	ret += "" + secs;
+	return ret;
 }
