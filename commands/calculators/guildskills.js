@@ -65,31 +65,43 @@ module.exports = {
 
         c++;
 
-        while(memberUUIDs.length != 0){
-            for (uuid of memberUUIDs) {
-                try {
-                    const skyblockData = await getSkyblockData(uuid);
-    
+        while (memberUUIDs.length != 0) {
+            try {
+                const skyblockData = await getSkyblockData(memberUUIDs[0]);
+                if (skyblockData.status == '404') {
+                    memberUUIDs.shift()
+                    console.log(`Player ${memberUUIDs[0]} has no profiles`)
+                }
+                else if (['400', '403', '500', '502', '503'].includes(skyblockData.status)) {
+                    return sentEmbed.edit(
+                        new Discord.MessageEmbed()
+                            .setDescription(`There was an error. Please try again later`)
+                            .setColor('DC143C')
+                            .setFooter(skyblockData.status)
+                            .setTimestamp()
+                    )
+                }
+                else {
                     try {
-                        users.push({ username: skyblockData.data.username, exp: skyblockData.data.weight.toString().substr(0, 9), uuid: uuid });
+                        users.push({ username: skyblockData.data.username, exp: skyblockData.data.weight.toString().substr(0, 9), uuid: memberUUIDs[0] });
                         memberUUIDs.shift();
                     } catch {
-                        console.log(`Error with UUID ${uuid}`);
+                        console.log(`Error with UUID ${memberUUIDs[0]}`);
                     }
-
-                } catch (e) {
-                    console.log(e);
                 }
 
-                sentEmbed.edit(
-                    new Discord.MessageEmbed()
-                        .setTitle(`${guildData.guild.name} Found!`)
-                        .setDescription(`Scanning guild - **This will take a while**`)
-                        .setColor('FF8C00')
-                        .setFooter(`Scanned ${c}/${guildData.guild.members.length}`)
-                        .setTimestamp(startTime)
-                ).then(c++).then(sleep(sleepTime));
+            } catch (e) {
+                console.log(e);
             }
+
+            sentEmbed.edit(
+                new Discord.MessageEmbed()
+                    .setTitle(`${guildData.guild.name} Found!`)
+                    .setDescription(`Scanning guild - **This will take a while**`)
+                    .setColor('FF8C00')
+                    .setFooter(`Scanned ${c}/${guildData.guild.members.length}`)
+                    .setTimestamp(startTime)
+            ).then(c++).then(sleep(sleepTime));
         }
 
         const timeTaken = Math.floor((Date.now() - startTime) / 1000); //in seconds
