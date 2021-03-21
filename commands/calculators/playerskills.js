@@ -64,7 +64,7 @@ module.exports = {
 
         return message.channel.send(
             new Discord.MessageEmbed()
-                .setAuthor(ign)
+                .setAuthor(ign, `https://cravatar.eu/helmavatar/${ign}/600.png`, `https://sky.shiiyu.moe/stats/${ign}`)
                 .setDescription(`Calculated skill exp: \`${calcSkills(apiData).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}\``)
                 .setColor('7CFC00')
                 .setTimestamp()
