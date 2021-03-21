@@ -79,6 +79,7 @@ module.exports = {
 						`Skill Grinder:	${getEmoji(apiData.data.skills.average_skills > config.requirements.guild.ranks.skills)}`
 					].join('\n'))
 					.setAuthor(ign, `https://cravatar.eu/helmavatar/${ign}/600.png`, `http://sky.shiiyu.moe/stats/${ign}`)
+					.setFooter(`Weight: ${toFixed(apiData.data.weight + apiData.data.weight_overflow)}`)
 					.setTimestamp()
 			).then(message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error)))
 		} else {
@@ -89,7 +90,7 @@ module.exports = {
 					.setFooter(`If you think this is wrong we'll check manually for you`)
 					.setAuthor(ign, `https://cravatar.eu/helmavatar/${ign}/600.png`, `http://sky.shiiyu.moe/stats/${ign}`)
 					.setDescription(`Sorry but you don't currently have ${config.requirements.guild.weight} weight.`)
-					.addField("Your weight:", (apiData.data.weight + apiData.data.weight_overflow).toString().substr(0, 7))
+					.addField("Your weight:", toFixed(apiData.data.weight + apiData.data.weight_overflow))
 					.setTimestamp()
 			).then(message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error)))
 		}
@@ -121,4 +122,9 @@ async function getTrueIgn(ign) {
 function getEmoji(input) {
 	if (input === true) return yes;
 	else return no;
+}
+
+function toFixed(num) {
+    var re = new RegExp('^-?\\d+(?:\.\\d{0,' + (2 || -1) + '})?');
+    return num.toString().match(re)[0];
 }
