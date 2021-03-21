@@ -3,6 +3,10 @@ const fetch = require('node-fetch')
 const fs = require('fs')
 const sleepTime = 500;
 
+const lv60 = 111672425;
+const lv50 = 55172425;
+const skills = [{name: 'mining', cap: lv60}, {name: 'foraging', cap: lv50}, {name: 'farming', cap: lv60}, {name: 'combat', cap: lv60}, {name: 'fishing', cap: lv50}, {name: 'taming', cap: lv50}];
+
 const loading = `819138970771652609`;
 
 module.exports = {
@@ -187,4 +191,16 @@ function ConvertToCSV(objArray) {
     }
 
     return str;
+}
+
+function calcSkills(apiData) {
+    if (apiData.data.skills.apiEnabled != true) {
+        return '-';
+    }
+    var c = 0;
+    skills.forEach(element => {
+        const skill = element.name;
+        const cap = element.cap;
+        if(apiData.data.skills.skill.experience > cap) c += cap;
+    });
 }
