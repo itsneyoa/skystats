@@ -235,12 +235,5 @@ function calcSkills(apiData) { // mining, foraging, farming, combat, fishing, ta
         exp += 0;
     }
 
-    try {
-        if (apiData.data.skills.taming.experience >= lv50) exp += lv50;
-        else exp += apiData.data.skills.taming.experience
-    } catch {
-        exp += 0;
-    }
-
     return Math.floor(exp);
 }
