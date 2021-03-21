@@ -5,7 +5,6 @@ const sleepTime = 500;
 
 const lv60 = 111672425;
 const lv50 = 55172425;
-const skills = [{name: 'mining', cap: lv60}, {name: 'foraging', cap: lv50}, {name: 'farming', cap: lv60}, {name: 'combat', cap: lv60}, {name: 'fishing', cap: lv50}, {name: 'taming', cap: lv50}];
 
 const loading = `819138970771652609`;
 
@@ -85,14 +84,15 @@ module.exports = {
                             .setTimestamp()
                     )
                 }
-                else {
+                else if (skyblockData.status == '200') {
                     try {
-                        users.push({ username: skyblockData.data.username, exp: skyblockData.data.weight.toString().substr(0, 9), uuid: memberUUIDs[0] });
+                        users.push({ username: skyblockData.data.username, exp: calcSkills(skyblockData), uuid: memberUUIDs[0]});
                         memberUUIDs.shift();
                     } catch {
                         console.log(`Error with UUID ${memberUUIDs[0]}`);
                     }
                 }
+                else sleep(10000)
 
             } catch (e) {
                 console.log(e);
@@ -105,7 +105,7 @@ module.exports = {
                     .setColor('FF8C00')
                     .setFooter(`Scanned ${c}/${guildData.guild.members.length}`)
                     .setTimestamp(startTime)
-            ).then(c++).then(sleep(sleepTime));
+            ).then(c++)//.then(sleep(sleepTime));
         }
 
         const timeTaken = Math.floor((Date.now() - startTime) / 1000); //in seconds
@@ -177,7 +177,7 @@ function formatTime(time) {
 
 function ConvertToCSV(objArray) {
     var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
-    var str = 'Username,Exp,uuid\n';
+    var str = 'Username,Skill Exp,UUID\n';
 
     for (var i = 0; i < array.length; i++) {
         var line = '';
@@ -193,14 +193,54 @@ function ConvertToCSV(objArray) {
     return str;
 }
 
-function calcSkills(apiData) {
+function calcSkills(apiData) { // mining, foraging, farming, combat, fishing, taming
     if (apiData.data.skills.apiEnabled != true) {
         return '-';
     }
-    var c = 0;
-    skills.forEach(element => {
-        const skill = element.name;
-        const cap = element.cap;
-        if(apiData.data.skills.skill.experience > cap) c += cap;
-    });
+
+    var exp = 0;
+
+    try {
+        if (apiData.data.skills.mining.experience >= lv60) exp += lv60;
+        else exp += apiData.data.skills.mining.experience
+    } catch {
+        exp += 0;
+    }
+
+    try {
+        if (apiData.data.skills.foraging.experience >= lv50) exp += lv50;
+        else exp += apiData.data.skills.foraging.experience
+    } catch {
+        exp += 0;
+    }
+
+    try {
+        if (apiData.data.skills.farming.experience >= lv60) exp += lv60;
+        else exp += apiData.data.skills.farming.experience
+    } catch {
+        exp += 0;
+    }
+
+    try {
+        if (apiData.data.skills.combat.experience >= lv60) exp += lv60;
+        else exp += apiData.data.skills.combat.experience
+    } catch {
+        exp += 0;
+    }
+
+    try {
+        if (apiData.data.skills.fishing.experience >= lv50) exp += lv50;
+        else exp += apiData.data.skills.fishing.experience
+    } catch {
+        exp += 0;
+    }
+
+    try {
+        if (apiData.data.skills.taming.experience >= lv50) exp += lv50;
+        else exp += apiData.data.skills.taming.experience
+    } catch {
+        exp += 0;
+    }
+
+    return Math.floor(exp);
 }
