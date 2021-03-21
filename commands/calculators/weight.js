@@ -61,7 +61,7 @@ module.exports = {
             new Discord.MessageEmbed()
                 .setAuthor(ign, `https://cravatar.eu/helmavatar/${ign}/600.png`, `https://sky.shiiyu.moe/stats/${ign}`)
                 .setColor('7CFC00')
-                .setDescription(`${ign}'s weights for their **${apiData.data.name}** profile are **${(apiData.data.weight).toString().substr(0, 7)} + ${(apiData.data.weight_overflow).toString().substr(0, 5)} Overflow (${(apiData.data.weight + apiData.data.weight_overflow).toString().substr(0, 7)} Total)**`)
+                .setDescription(`${ign}'s weights for their **${apiData.data.name}** profile are **${toFixed(apiData.data.weight)} + ${toFixed(apiData.data.weight_overflow)} Overflow (${toFixed(apiData.data.weight + apiData.data.weight_overflow)} Total)**`)
                 .addFields(
                     {
                         name: 'Skills',
