@@ -71,9 +71,9 @@ module.exports = {
         while (memberUUIDs.length != 0) {
             try {
                 const skyblockData = await getSkyblockData(memberUUIDs[0]);
-                if (skyblockData.status == '404') {
+                if (skyblockData.status == '404' || skyblockData.data.skills == null) {
                     memberUUIDs.shift()
-                    console.log(`Player ${memberUUIDs[0]} has no profiles`)
+                    console.log(`Player ${memberUUIDs[0]} has no profiles or null value`)
                 }
                 else if (['400', '403', '500', '502', '503'].includes(skyblockData.status)) {
                     return sentEmbed.edit(
