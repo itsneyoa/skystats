@@ -33,7 +33,7 @@ module.exports = {
 
         if (message.channel.type === 'dm') return;
 
-        if (message.author.id != config.discord.ownerId) return message.channel.send(
+        if ((message.author.id != config.discord.ownerId) && command.ownerOnly) return message.channel.send(
             new Discord.MessageEmbed()
                 .setDescription(`Sorry, you don't have permission to do this`)
                 .setColor('DC143C')
@@ -45,8 +45,8 @@ module.exports = {
             console.error(error);
             return message.channel.send(
                 new Discord.MessageEmbed()
-                .setDescription(`Something went wrong, please try again in a few minutes`)
-                .setColor('DC143C')
+                    .setDescription(`Something went wrong, please try again in a few minutes`)
+                    .setColor('DC143C')
             );
         }
     },
