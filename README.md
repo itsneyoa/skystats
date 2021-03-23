@@ -4,10 +4,12 @@
 
 ### Table of Content
 
-- [Prerequisites](#prerequisites)
-- [Installation & Setup](#installation--setup)
-- [Configuration](#configuration)
-- [Roadmap](#roadmap)
+- [SkyStats](#skystats)
+    - [Table of Content](#table-of-content)
+    - [Prerequisites](#prerequisites)
+    - [Installation & Setup](#installation--setup)
+    - [Configuration](#configuration)
+    - [Roadmap](#roadmap)
 
 
 ### Prerequisites
@@ -22,7 +24,7 @@ Firstly clone the repository using:
 ```
 git clone https://github.com/itsneyoa/skystats.git
 ```
-Then go into the `Guild-Requirement-Check` folder:
+Then go into the `SkyStats` folder:
 ```
 cd skystats
 ```
