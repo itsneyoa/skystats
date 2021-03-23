@@ -83,7 +83,7 @@ module.exports = {
 					},
 					{
 						name: "Other",
-						value: getOtherStuff(apiData),
+						value: await getOtherStuff(apiData),
 						inline: true
 					}
 				)
@@ -149,16 +149,37 @@ function getDungeonRoles(apiData) {
 	].join('\n')
 }
 
-function getOtherStuff(apiData) {
+async function getScammerData() {
+	const response = await fetch('https://raw.githubusercontent.com/skyblockz/pricecheckbot/master/scammer.json');
+	return await response.json();
+}
+
+async function testScammer(ign) {
+	let uuidClean = await getUUID(ign);
+	uuidClean = uuidClean.replace(/-/g,"")
+	
+	scammerData = await getScammerData();
+
+	if (scammerData.hasOwnProperty(uuidClean)) return true;
+	return false;
+}
+
+async function getOtherStuff(apiData) {
 	var f7splustime;
 	try {
 		f7splustime = formatTime(apiData.data.dungeons.types.catacombs.fastest_time_s_plus.tier_7.seconds);
 	} catch {
 		f7splustime = `N/A`;
 	}
+
+	var scammer = await testScammer(apiData.data.username);
+	if (scammer) scammer = yes;
+	else scammer = no;
+
 	return [
 		`Secrets: \`${apiData.data.dungeons.secrets_found.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}\``,
-		`Best F7 S+: \`${f7splustime}\``
+		`Best F7 S+: \`${f7splustime}\``,
+		`Scammer: ${scammer}`
 	].join('\n')
 }
 
