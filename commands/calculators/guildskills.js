@@ -1,7 +1,6 @@
 const Discord = require('discord.js');
 const fetch = require('node-fetch')
 const fs = require('fs')
-const sleepTime = 500;
 
 const lv60 = 111672425;
 const lv50 = 55172425;
@@ -13,14 +12,8 @@ module.exports = {
     aliases: ['gsk', 'guildsk'],
     usage: 'guildskills <guild>',
     description: 'Scans a guild, checking all members total skill experience',
-    guildOnly: true,
+    ownerOnly: true,
     async execute(message, args) {
-        if (!isOwner(message.author.id)) return message.channel.send(
-            new Discord.MessageEmbed()
-                .setDescription(`Sorry, you don't have permission to do this`)
-                .setColor('DC143C')
-        )
-
         if (!args[0]) {
             return message.channel.send(
                 new Discord.MessageEmbed()
@@ -142,13 +135,6 @@ async function getSkyblockData(uuid) {
 
     const response = await fetch(`https://hypixel-api.senither.com/v1/profiles/${uuid}/weight?key=${config.discord.apiKey}`);
     return await response.json();
-}
-
-function isOwner(member) {
-    delete require.cache[require.resolve('../../config.json')];
-    const config = require('../../config.json');
-
-    return member == config.discord.ownerId;
 }
 
 function sleep(milliseconds) {

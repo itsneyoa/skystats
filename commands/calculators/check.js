@@ -10,7 +10,6 @@ module.exports = {
 	aliases: ['c'],
 	usage: 'check [ign]',
 	description: 'Gets if player meets certain role requirements',
-	guildOnly: true,
 	async execute(message, args) {
 		if (!args[0]) {
 			var ign = message.member.displayName;

@@ -5,7 +5,6 @@ module.exports = {
 	aliases: ['lag', 'latency'],
 	usage: 'ping',
 	description: 'Gets latency of the bot',
-	guildOnly: false,
 	execute(message, args) {
 		message.channel.send(
 			new Discord.MessageEmbed()

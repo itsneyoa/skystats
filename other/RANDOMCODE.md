@@ -34,7 +34,7 @@ module.exports = {
     aliases: ['hello'],
     usage: 'hi',
     description: 'Says hi!',
-    guildOnly: false,
+    ownerOnly: false,
     execute(message, args) {
 
     },

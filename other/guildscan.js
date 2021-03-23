@@ -8,7 +8,7 @@ module.exports = {
     aliases: ['gsc', 'scanguild'],
     usage: 'guildscan <guild>',
     description: 'Scans a guild, checking all members against requirements',
-    guildOnly: true,
+    ownerOnly: true,
     async execute(message, args) {
         delete require.cache[require.resolve('../../config.json')];
         const config = require('../../config.json');

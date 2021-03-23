@@ -6,14 +6,8 @@ module.exports = {
     aliases: ['restart', 'r'],
     usage: 'reload <command>',
     description: 'Reloads a command',
-    guildOnly: false,
+    ownerOnly: true,
     execute(message, args) {
-        if (!isOwner(message.author.id)) return message.channel.send(
-            new Discord.MessageEmbed()
-                .setDescription(`Sorry, you don't have permission to do this`)
-                .setColor('DC143C')
-        )
-
         if (!args.length) return message.channel.send(
             new Discord.MessageEmbed()
                 .setDescription(`You need to specify a command to reload`)
@@ -58,10 +52,3 @@ module.exports = {
         }
     },
 };
-
-function isOwner(member) {
-    delete require.cache[require.resolve('../../config.json')];
-    const config = require('../../config.json');
-
-    return member == config.discord.ownerId;
-}

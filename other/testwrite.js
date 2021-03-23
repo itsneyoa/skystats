@@ -6,7 +6,7 @@ module.exports = {
     aliases: ['w'],
     usage: 'write',
     description: 'tests writing',
-    guildOnly: false,
+    ownerOnly: false,
     execute(message, args) {
         var users = [];
         c = 0;

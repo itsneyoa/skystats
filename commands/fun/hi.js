@@ -5,7 +5,6 @@ module.exports = {
     aliases: ['hello'],
     usage: 'hi',
     description: 'Says hi!',
-    guildOnly: false,
     execute(message, args) {
         return message.channel.send(
             new Discord.MessageEmbed()

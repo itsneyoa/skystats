@@ -6,14 +6,8 @@ module.exports = {
     aliases: ['presence', 'setstatus'],
     usage: 'status <statusType> <statusMessage>',
     description: 'Sets bot status',
-    guildOnly: false,
+    ownerOnly: true,
     execute(message, args) {
-        if (!isOwner(message.author.id)) return message.channel.send(
-            new Discord.MessageEmbed()
-                .setDescription(`Sorry, you don't have permission to do this`)
-                .setColor('DC143C')
-        );
-
         if (!args.length) {
             return message.client.user.setActivity()
                 .then(message.channel.send(
@@ -48,13 +42,6 @@ module.exports = {
             ))
     },
 };
-
-function isOwner(member) {
-    delete require.cache[require.resolve('../../config.json')];
-    const config = require('../../config.json');
-
-    return member == config.discord.ownerId;
-}
 
 function isValidStatus(status) {
     return statuses.includes(status);

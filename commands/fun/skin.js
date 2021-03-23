@@ -5,7 +5,6 @@ module.exports = {
     aliases: ['head', 'skull', 'sk'],
     usage: 'skin [ign]',
     description: 'Gets player head from ign',
-    guildOnly: false,
     execute(message, args) {
         if (!args[0]) {
             var ign = message.member.displayName;

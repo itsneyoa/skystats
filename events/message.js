@@ -31,13 +31,13 @@ module.exports = {
 
         if (!command) return;
 
-        /*if (command.guildOnly && message.channel.type === 'dm') {
-            return message.channel.send(
-                new Discord.MessageEmbed()
-                .setDescription(`Sorry, I can't execute \`${command.name}\` inside of DMs`)
+        if (message.channel.type === 'dm') return;
+
+        if (message.author.id != config.discord.ownerId) return message.channel.send(
+            new Discord.MessageEmbed()
+                .setDescription(`Sorry, you don't have permission to do this`)
                 .setColor('DC143C')
-            );
-        }*/ if (message.channel.type === 'dm') return;
+        );
 
         try {
             command.execute(message, args);
