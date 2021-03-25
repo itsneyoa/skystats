@@ -45,7 +45,8 @@ module.exports = {
                 `Version: \`${package.version}\``,
                 `Issues: [click here](https://github.com/itsneyoa/skystats/issues)`,
                 `Server: \`${message.guild.name}\``,
-                `Channel: ${message.channel}`
+                `Channel: ${message.channel}`,
+                `Discord: [click here](https://discord.neyoa.me)`
             ].join('\n'))
 
             return message.author.send(embed)
