@@ -13,18 +13,20 @@ module.exports = {
         if (!args.length) {
             delete require.cache[require.resolve('../../package.json')];
             const package = require('../../package.json');
-    
+
             delete require.cache[require.resolve('../../config.json')];
             const config = require('../../config.json');
-    
+
             const commandFolders = fs.readdirSync('./commands');
-    
+
             let embed = new Discord.MessageEmbed()
                 .setAuthor(`Help - ${message.client.user.username}`, message.client.user.avatarURL())
                 .setDescription(`For more information run \`help [command]\``)
                 .setColor(message.guild.me.displayHexColor)
                 .setFooter('Made by neyoa ❤')
                 .setTimestamp();
+
+            var commandsNum = 0;
 
             for (const folder of commandFolders) {
                 let descriptions = [];
@@ -36,18 +38,26 @@ module.exports = {
                     currentCommand.push('-');
                     currentCommand.push(command.description);
                     descriptions.push(currentCommand.join(' '));
+                    commandsNum++;
                 }
                 embed.addField((folder.charAt(0).toUpperCase() + folder.slice(1)), descriptions.join('\n'))
             }
 
             embed.addField('Info', [
                 `Prefix: \`${config.discord.prefix}\``,
-                `Version: \`${package.version}\``,
                 `Issues: [click here](https://github.com/itsneyoa/skystats/issues)`,
                 `Server: \`${message.guild.name}\``,
                 `Channel: ${message.channel}`,
                 `Discord: [click here](https://discord.neyoa.me)`
-            ].join('\n'))
+            ].join('\n'), true)
+
+            embed.addField('Stats', [
+                `Unique users: \`${message.client.users.cache.size}\``,
+                `Servers: \`${message.client.guilds.cache.size}\``,
+                `Version: \`${package.version}\``,
+                `Uptime: \`${timeConversion(message.client.uptime)}\``,
+                `Commands: \`${commandsNum}\``
+            ].join('\n'), true)
 
             return message.author.send(embed)
                 .then(() => {
@@ -70,16 +80,16 @@ module.exports = {
         if (!command) {
             return message.channel.send(
                 new Discord.MessageEmbed()
-                .setDescription(`\`${name}\` isn't a valid command`)
-                .setColor('DC143C')
+                    .setDescription(`\`${name}\` isn't a valid command`)
+                    .setColor('DC143C')
             );
         }
 
         let embed = new Discord.MessageEmbed()
-                .setAuthor(`Help - ${command.name.charAt(0).toUpperCase() + command.name.slice(1)}`, message.client.user.avatarURL())
-                .setColor(message.guild.me.displayHexColor)
-                .setFooter('Made by neyoa ❤')
-                .setTimestamp();
+            .setAuthor(`Help - ${command.name.charAt(0).toUpperCase() + command.name.slice(1)}`, message.client.user.avatarURL())
+            .setColor(message.guild.me.displayHexColor)
+            .setFooter('Made by neyoa ❤')
+            .setTimestamp();
 
         embed.setDescription([
             `*${command.description}*`,
@@ -88,17 +98,41 @@ module.exports = {
         embed.addField('Aliases', `\`${command.aliases.join('\n')}\``, true)
 
         return message.author.send(embed)
-                .then(() => {
-                    message.react(yes);
+            .then(() => {
+                message.react(yes);
+            })
+            .catch(() => {
+                message.channel.send(
+                    new Discord.MessageEmbed()
+                        .setDescription(`${message.author}, I can't DM you! Make sure you have DMs enabled!`)
+                        .setColor('DC143C')
+                ).then(() => {
+                    message.react(no);
                 })
-                .catch(() => {
-                    message.channel.send(
-                        new Discord.MessageEmbed()
-                            .setDescription(`${message.author}, I can't DM you! Make sure you have DMs enabled!`)
-                            .setColor('DC143C')
-                    ).then(() => {
-                        message.react(no);
-                    })
-                }); // individual commands
+            }); // individual commands
     },
 };
+
+function timeConversion(millisec) {
+    var seconds = (millisec / 1000).toFixed(0);
+
+    var minutes = (millisec / (1000 * 60)).toFixed(0);
+
+    var hours = (millisec / (1000 * 60 * 60)).toFixed(0);
+
+    var days = (millisec / (1000 * 60 * 60 * 24)).toFixed(0);
+
+    var weeks = (millisec / (1000 * 60 * 60 * 24 * 7)).toFixed(0);
+
+    if (seconds < 60) {
+        return seconds + " Seconds";
+    } else if (minutes < 60) {
+        return minutes + " Minutes";
+    } else if (hours < 24) {
+        return hours + " Hours";
+    } else if (days > 7) {
+        return days + " Days"
+    } else {
+        return weeks + " Weeks"
+    }
+}
