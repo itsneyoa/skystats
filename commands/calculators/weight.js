@@ -6,7 +6,7 @@ const loading = `819138970771652609`
 module.exports = {
     name: 'weight',
     aliases: ['we'],
-    usage: 'weight [ign]',
+    usage: 'weight [ign] [profile]',
     description: "Gets the weight of a player's profile",
     async execute(message, args) {
         if (!args[0]) {

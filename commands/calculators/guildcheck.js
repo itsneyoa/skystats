@@ -8,7 +8,7 @@ const loading = `819138970771652609`;
 module.exports = {
 	name: 'guildcheck',
 	aliases: ['gc', 'gcheck', 'guild'],
-	usage: 'guildcheck [ign]',
+	usage: 'guildcheck [ign] [profile]',
 	description: 'Tests if a player meets the requirements for a guild',
 	async execute(message, args) {
 		delete require.cache[require.resolve('../../config.json')];
@@ -108,13 +108,13 @@ async function getUUID(ign) {
 	return uuid.substr(0, 8) + "-" + uuid.substr(8, 4) + "-" + uuid.substr(12, 4) + "-" + uuid.substr(16, 4) + "-" + uuid.substr(20);
 }
 
-async function getApiData(ign) {
-	delete require.cache[require.resolve('../../config.json')];
-	const config = require('../../config.json');
+async function getApiData(ign, method) {
+    delete require.cache[require.resolve('../../config.json')];
+    const config = require('../../config.json');
 
-	const UUID = await getUUID(ign);
-	const response = await fetch(`https://hypixel-api.senither.com/v1/profiles/${UUID}/save?key=${config.discord.apiKey}`);
-	return await response.json();
+    const UUID = await getUUID(ign);
+    const response = await fetch(`https://hypixel-api.senither.com/v1/profiles/${UUID}/${method}?key=${config.discord.apiKey}`);
+    return await response.json();
 }
 
 async function getTrueIgn(ign) {

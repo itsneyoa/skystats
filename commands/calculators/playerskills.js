@@ -11,7 +11,7 @@ const loading = `819138970771652609`;
 module.exports = {
     name: 'playerskills',
     aliases: ['psk', 'playersk'],
-    usage: 'playerskills [player]',
+    usage: 'playerskills [player] [profile]',
     description: 'bottom text',
     guildOnly: true,
     async execute(message, args) {

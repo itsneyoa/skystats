@@ -8,7 +8,7 @@ const loading = `819138970771652609`;
 module.exports = {
 	name: 'check',
 	aliases: ['c'],
-	usage: 'check [ign]',
+	usage: 'check [ign] [profile]',
 	description: 'Gets if player meets certain role requirements',
 	async execute(message, args) {
 		if (!args[0]) {
