@@ -23,6 +23,9 @@ module.exports = {
 			else var ign = args[0];
 		} // Gets IGN
 
+		var method = 'save';
+		if (args[1]) method = args[1];
+
 		ign = ign.replace(/\W/g, ''); // removes weird characters
 
 		message.react(loading);
@@ -42,14 +45,16 @@ module.exports = {
 		ign = await getTrueIgn(ign);
 
 		// At this point we know its a valid IGN, but not if it has skyblock profiles
-		const apiData = await getApiData(ign); // Gets all skyblock player data from Senither's Hypixel API Facade
+		const apiData = await getApiData(ign, method); // Gets all skyblock player data from Senither's Hypixel API Facade
 
-		if (apiData.status == 404) return message.channel.send(
-			new Discord.MessageEmbed()
-				.setDescription(`No Skyblock profile found for \`${ign}\``)
-				.setColor('DC143C')
-				.setTimestamp()
-		).then(message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error)))
+		if (apiData.status == 404) {
+			return message.channel.send(
+				new Discord.MessageEmbed()
+					.setDescription(`No Skyblock profile found for \`${ign}\``)
+					.setColor('DC143C')
+					.setTimestamp()
+			).then(message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error)))
+		}
 
 		// IGN is valid and player has skyblock profiles
 
@@ -124,6 +129,6 @@ function getEmoji(input) {
 }
 
 function toFixed(num) {
-    var re = new RegExp('^-?\\d+(?:\.\\d{0,' + (2 || -1) + '})?');
-    return num.toString().match(re)[0];
+	var re = new RegExp('^-?\\d+(?:\.\\d{0,' + (2 || -1) + '})?');
+	return num.toString().match(re)[0];
 }

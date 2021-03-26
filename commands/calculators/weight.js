@@ -18,6 +18,9 @@ module.exports = {
             else var ign = args[0];
         } // Gets IGN
 
+        var method = 'save';
+        if (args[1]) method = args[1];
+
         ign = ign.replace(/\W/g, ''); // removes weird characters
 
         message.react(loading);
@@ -37,14 +40,25 @@ module.exports = {
         ign = await getTrueIgn(ign);
 
         // At this point we know its a valid IGN, but not if it has skyblock profiles
-        const apiData = await getApiData(ign); // Gets all skyblock player data from Senither's Hypixel API Facade
+        const apiData = await getApiData(ign, method); // Gets all skyblock player data from Senither's Hypixel API Facade
 
-        if (apiData.status == 404) return message.channel.send(
-            new Discord.MessageEmbed()
-                .setDescription(`No Skyblock profile found for \`${ign}\``)
-                .setColor('DC143C')
-                .setTimestamp()
-        ).then(message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error)))
+        if (apiData.status == 404) {
+            if (apiData.reason == 'Failed to find a profile using the given strategy') {
+                return message.channel.send(
+                    new Discord.MessageEmbed()
+                        .setDescription(`Profile \`${method}\` not found for \`${ign}\``)
+                        .setColor('DC143C')
+                        .setTimestamp()
+                ).then(message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error)))
+            } else {
+                return message.channel.send(
+                    new Discord.MessageEmbed()
+                        .setDescription(`No Skyblock profile found for \`${ign}\``)
+                        .setColor('DC143C')
+                        .setTimestamp()
+                ).then(message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error)))
+            }
+        }
 
         // IGN is valid and player has skyblock profiles
 
@@ -52,6 +66,14 @@ module.exports = {
             new Discord.MessageEmbed()
                 .setAuthor(ign, `https://cravatar.eu/helmavatar/${ign}/600.png`, `https://sky.shiiyu.moe/stats/${ign}`)
                 .setDescription('You currently have skills API disabled, please enable it in the skyblock menu and try again')
+                .setColor('DC143C')
+                .setTimestamp()
+        ).then(message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error)))
+
+        if (apiData.data.dungeons == null) return message.channel.send(
+            new Discord.MessageEmbed()
+                .setAuthor(ign, `https://cravatar.eu/helmavatar/${ign}/600.png`, `https://sky.shiiyu.moe/stats/${ign}`)
+                .setDescription(`${ign} has not entered the catacombs`)
                 .setColor('DC143C')
                 .setTimestamp()
         ).then(message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error)))
@@ -182,12 +204,12 @@ async function getUUID(ign) {
     return uuid.substr(0, 8) + "-" + uuid.substr(8, 4) + "-" + uuid.substr(12, 4) + "-" + uuid.substr(16, 4) + "-" + uuid.substr(20);
 }
 
-async function getApiData(ign) {
+async function getApiData(ign, method) {
     delete require.cache[require.resolve('../../config.json')];
     const config = require('../../config.json');
 
     const UUID = await getUUID(ign);
-    const response = await fetch(`https://hypixel-api.senither.com/v1/profiles/${UUID}/save?key=${config.discord.apiKey}`);
+    const response = await fetch(`https://hypixel-api.senither.com/v1/profiles/${UUID}/${method}?key=${config.discord.apiKey}`);
     return await response.json();
 }
 
