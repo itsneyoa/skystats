@@ -133,7 +133,7 @@ async function getSkyblockData(uuid) {
     delete require.cache[require.resolve('../../config.json')];
     const config = require('../../config.json');
 
-    const response = await fetch(`https://hypixel-api.senither.com/v1/profiles/${uuid}/weight?key=${config.discord.apiKey}`);
+    const response = await fetch(`https://hypixel-api.senither.com/v1/profiles/${uuid}/save?key=${config.discord.apiKey}`);
     return await response.json();
 }
 
