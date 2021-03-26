@@ -52,8 +52,8 @@ module.exports = {
             ].join('\n'), true)
 
             embed.addField('Stats', [
-                `Unique users: \`${message.client.users.cache.size}\``,
-                `Servers: \`${message.client.guilds.cache.size}\``,
+                `Unique users: \`${message.client.users.cache.size.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}\``,
+                `Servers: \`${message.client.guilds.cache.size.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}\``,
                 `Version: \`${package.version}\``,
                 `Uptime: \`${timeConversion(message.client.uptime)}\``,
                 `Commands: \`${commandsNum}\``
