@@ -41,8 +41,8 @@ module.exports = {
             ).then(
                 discordLog(message.client,
                     new Discord.MessageEmbed()
-                        .setAuthor(client.user.userame, client.user.avatarURL())
-                        .setDescription(`\`${message.author}\` tried to use admin-only command \`${message}\``)
+                        .setAuthor(client.user.username, client.user.avatarURL())
+                        .setDescription(`${message.author} tried to use admin-only command \`${message}\``)
                         .setColor('FF8C00')
                         .setTimestamp()
                 )
@@ -60,7 +60,7 @@ module.exports = {
             ).then(
                 discordLog(message.client,
                     new Discord.MessageEmbed()
-                        .setAuthor(client.user.userame, client.user.avatarURL())
+                        .setAuthor(client.user.username, client.user.avatarURL())
                         .setDescription(`Error caught: \`${message.author}\` tried to run \`${message} ${args.join('\n')}\``)
                         .setColor('DC143C')
                         .setTimestamp()
