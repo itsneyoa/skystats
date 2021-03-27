@@ -70,6 +70,13 @@ module.exports = {
                 else if (!((skyblockData.data.weight + skyblockData.data.weight_overflow) >= config.requirements.guild.weight)) kicking.push(skyblockData.data.username);
             } catch(e) {
                 console.log(e);
+                discordLog(message.client,
+                    new Discord.MessageEmbed()
+                        .setAuthor(`Error: ${this.name}`, message.client.user.avatarURL())
+                        .setDescription(`\`${e}\``)
+                        .setColor('DC143C')
+                        .setTimestamp()
+                )
             }
 
             sentEmbed.edit(
@@ -148,4 +155,13 @@ function formatTime(time) {
 	ret += "" + mins + ":" + (secs < 10 ? "0" : "");
 	ret += "" + secs;
 	return ret;
+}
+
+function discordLog(client, embed) {
+    delete require.cache[require.resolve('../../config.json')];
+    const config = require('../../config.json');
+
+    client.channels.fetch(config.discord.logChannel)
+        .then(channel => channel.send(embed))
+        .catch(console.error)
 }

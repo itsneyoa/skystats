@@ -33,11 +33,21 @@ module.exports = {
 
         if (message.channel.type === 'dm') return;
 
-        if ((message.author.id != config.discord.ownerId) && command.ownerOnly) return message.channel.send(
-            new Discord.MessageEmbed()
-                .setDescription(`Sorry, you don't have permission to do this`)
-                .setColor('DC143C')
-        );
+        if ((message.author.id != config.discord.ownerId) && command.ownerOnly) {
+            return message.channel.send(
+                new Discord.MessageEmbed()
+                    .setDescription(`Sorry, you don't have permission to do this`)
+                    .setColor('DC143C')
+            ).then(
+                discordLog(message.client,
+                    new Discord.MessageEmbed()
+                        .setAuthor(client.user.userame, client.user.avatarURL())
+                        .setDescription(`\`${message.author}\` tried to use admin-only command \`${message}\``)
+                        .setColor('FF8C00')
+                        .setTimestamp()
+                )
+            )
+        }
 
         try {
             command.execute(message, args);
@@ -47,7 +57,24 @@ module.exports = {
                 new Discord.MessageEmbed()
                     .setDescription(`Something went wrong, please try again in a few minutes`)
                     .setColor('DC143C')
-            );
+            ).then(
+                discordLog(message.client,
+                    new Discord.MessageEmbed()
+                        .setAuthor(client.user.userame, client.user.avatarURL())
+                        .setDescription(`Error caught: \`${message.author}\` tried to run \`${message} ${args.join('\n')}\``)
+                        .setColor('DC143C')
+                        .setTimestamp()
+                )
+            )
         }
     },
 };
+
+function discordLog(client, embed) {
+    delete require.cache[require.resolve('../config.json')];
+    const config = require('../config.json');
+
+    client.channels.fetch(config.discord.logChannel)
+        .then(channel => channel.send(embed))
+        .catch(console.error)
+}

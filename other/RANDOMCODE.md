@@ -70,3 +70,26 @@ function formatTime(time) {
 	return ret;
 }
 ```
+
+Log to discord channel
+```
+function discordLog(client, embed) {
+    delete require.cache[require.resolve('../../config.json')];
+    const config = require('../../config.json');
+
+    client.channels.fetch(config.discord.logChannel)
+        .then(channel => channel.send(embed))
+        .catch(console.error)
+}
+```
+
+Embed to log
+```
+discordLog(message.client,
+                    new Discord.MessageEmbed()
+                        .setAuthor(`Error: ${this.name}`, message.client.user.avatarURL())
+                        .setDescription(`\`${e}\``)
+                        .setColor('DC143C')
+                        .setTimestamp()
+                )
+```

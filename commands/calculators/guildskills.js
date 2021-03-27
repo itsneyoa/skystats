@@ -67,6 +67,13 @@ module.exports = {
                 if (skyblockData.status == '404' || skyblockData.data.skills == null) {
                     memberUUIDs.shift()
                     console.log(`Player ${memberUUIDs[0]} has no profiles or null value`)
+                    discordLog(message.client,
+                        new Discord.MessageEmbed()
+                            .setAuthor(`Error: ${this.name}`, message.client.user.avatarURL())
+                            .setDescription(`Player ${memberUUIDs[0]} has no profiles or null value`)
+                            .setColor('DC143C')
+                            .setTimestamp()
+                    )
                 }
                 else if (['400', '403', '500', '502', '503'].includes(skyblockData.status)) {
                     return sentEmbed.edit(
@@ -75,20 +82,42 @@ module.exports = {
                             .setColor('DC143C')
                             .setFooter(skyblockData.status)
                             .setTimestamp()
+                    ).then(
+                        discordLog(message.client,
+                            new Discord.MessageEmbed()
+                                .setAuthor(`Error: ${this.name}`, message.client.user.avatarURL())
+                                .setDescription(`Skyblock API Error: \`${apiData.status}\``)
+                                .setColor('DC143C')
+                                .setTimestamp()
+                        )
                     )
                 }
                 else if (skyblockData.status == '200') {
                     try {
-                        users.push({ username: skyblockData.data.username, exp: calcSkills(skyblockData), uuid: memberUUIDs[0]});
+                        users.push({ username: skyblockData.data.username, exp: calcSkills(skyblockData), uuid: memberUUIDs[0] });
                         memberUUIDs.shift();
                     } catch {
                         console.log(`Error with UUID ${memberUUIDs[0]}`);
+                        discordLog(message.client,
+                            new Discord.MessageEmbed()
+                                .setAuthor(`Error: ${this.name}`, message.client.user.avatarURL())
+                                .setDescription(`Error with UUID ${memberUUIDs[0]}`)
+                                .setColor('DC143C')
+                                .setTimestamp()
+                        )
                     }
                 }
                 else sleep(10000)
 
             } catch (e) {
                 console.log(e);
+                discordLog(message.client,
+                    new Discord.MessageEmbed()
+                        .setAuthor(`Error: ${this.name}`, message.client.user.avatarURL())
+                        .setDescription(`\`${e}\``)
+                        .setColor('DC143C')
+                        .setTimestamp()
+                )
             }
 
             sentEmbed.edit(
@@ -222,4 +251,13 @@ function calcSkills(apiData) { // mining, foraging, farming, combat, fishing, ta
     }
 
     return Math.floor(exp);
+}
+
+function discordLog(client, embed) {
+    delete require.cache[require.resolve('../../config.json')];
+    const config = require('../../config.json');
+
+    client.channels.fetch(config.discord.logChannel)
+        .then(channel => channel.send(embed))
+        .catch(console.error)
 }

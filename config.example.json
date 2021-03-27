@@ -3,7 +3,8 @@
         "token": "",
         "apiKey": "",
         "prefix": "-",
-        "ownerId": ""
+        "ownerId": "",
+        "logChannel": ""
     },
     "requirements": {
         "roles": {
