@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const fs = require('fs')
+const fs = require('fs');
 
 const yes = `819295941621841970`;
 const no = `819295822230716467`;
@@ -85,16 +85,23 @@ module.exports = {
             );
         }
 
+        if (command.ownerOnly && !isOwner(message.author.id)) {
+            return message.channel.send(
+                new Discord.MessageEmbed()
+                    .setDescription(`This command is owner only!`)
+                    .setColor('DC143C')
+            );
+        }
+
         let embed = new Discord.MessageEmbed()
             .setAuthor(`Help - ${command.name.charAt(0).toUpperCase() + command.name.slice(1)}`, message.client.user.avatarURL())
             .setColor(message.guild.me.displayHexColor)
             .setFooter('Made by neyoa ❤')
             .setTimestamp();
 
-        embed.setDescription([
-            `*${command.description}*`,
-            `Usage: \`${command.usage}\``
-        ])
+        var desc = [`*${command.description}*`, `Usage: \`${command.usage}\``];
+
+        embed.setDescription(desc.join('\n'))
         embed.addField('Aliases', `\`${command.aliases.join('\n')}\``, true)
 
         return message.author.send(embed)
@@ -135,4 +142,11 @@ function timeConversion(millisec) {
     } else {
         return weeks + " Weeks"
     }
+}
+
+function isOwner(id) {
+    delete require.cache[require.resolve('../../config.json')];
+    const config = require('../../config.json');
+
+    return id == config.discord.ownerId;
 }
