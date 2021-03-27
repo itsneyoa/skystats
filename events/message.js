@@ -1,5 +1,6 @@
 const Discord = require('discord.js')
 const fs = require('fs');
+const maniacsId = '753255055024586934';
 
 const escapeRegex = str => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
@@ -46,6 +47,14 @@ module.exports = {
                         .setColor('FF8C00')
                         .setTimestamp()
                 )
+            )
+        }
+
+        if ((message.guild.id != maniacsId) && command.maniacsOnly) {
+            return message.channel.send(
+                new Discord.MessageEmbed()
+                    .setDescription(`Sorry, this command is only available in [Skyblock Maniacs](https://discord.gg/maniacs) Discord.`)
+                    .setColor('DC143C')
             )
         }
 
