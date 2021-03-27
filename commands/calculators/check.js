@@ -10,6 +10,7 @@ module.exports = {
 	aliases: ['c'],
 	usage: 'check [ign] [profile]',
 	description: 'Gets if player meets certain role requirements',
+	maniacsOnly: true,
 	async execute(message, args) {
 		if (!args[0]) {
 			var ign = message.member.displayName;
@@ -21,7 +22,7 @@ module.exports = {
 		} // Gets IGN
 
 		var method = 'save';
-        if (args[1]) method = args[1];
+		if (args[1]) method = args[1];
 
 		ign = ign.replace(/\W/g, ''); // removes weird characters
 
@@ -40,27 +41,29 @@ module.exports = {
 			}); // Test if IGN esists
 
 		ign = await getTrueIgn(ign);
-		
+
+		var scammer = await testScammer(ign);
+
 		// At this point we know its a valid IGN, but not if it has skyblock profiles
 		const apiData = await getApiData(ign, method); // Gets all skyblock player data from Senither's Hypixel API Facade
 
 		if (apiData.status == 404) {
-            if (apiData.reason == 'Failed to find a profile using the given strategy') {
-                return message.channel.send(
-                    new Discord.MessageEmbed()
-                        .setDescription(`Profile \`${method}\` not found for \`${ign}\``)
-                        .setColor('DC143C')
-                        .setTimestamp()
-                ).then(message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error)))
-            } else {
-                return message.channel.send(
-                    new Discord.MessageEmbed()
-                        .setDescription(`No Skyblock profile found for \`${ign}\``)
-                        .setColor('DC143C')
-                        .setTimestamp()
-                ).then(message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error)))
-            }
-        }
+			if (apiData.reason == 'Failed to find a profile using the given strategy') {
+				return message.channel.send(
+					new Discord.MessageEmbed()
+						.setDescription(`Profile \`${method}\` not found for \`${ign}\``)
+						.setColor('DC143C')
+						.setTimestamp()
+				).then(message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error)))
+			} else {
+				return message.channel.send(
+					new Discord.MessageEmbed()
+						.setDescription(`No Skyblock profile found for \`${ign}\``)
+						.setColor('DC143C')
+						.setTimestamp()
+				).then(message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error)))
+			}
+		}
 
 		// IGN is valid and player has skyblock profiles
 
@@ -80,10 +83,37 @@ module.exports = {
 			)
 		}
 
+		if (scammer) {
+			return message.channel.send(
+				new Discord.MessageEmbed()
+					.setAuthor(ign, `https://cravatar.eu/helmavatar/${ign}/600.png`, `https://sky.shiiyu.moe/stats/${ign}`)
+					.setDescription(`:warning: **This user is a scammer** :warning:`)
+					.addFields(
+						{
+							name: "Skill Roles",
+							value: getSkillRoles(apiData),
+							inline: true
+						},
+						{
+							name: "Carriers",
+							value: getDungeonRoles(apiData),
+							inline: true
+						},
+						{
+							name: "Other",
+							value: await getOtherStuff(apiData),
+							inline: true
+						}
+					)
+					.setColor('FF8C00')
+					.setFooter(`Profile: ${apiData.data.name}`)
+					.setTimestamp()
+			).then(message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error)))
+		}
+
 		return message.channel.send(
 			new Discord.MessageEmbed()
 				.setAuthor(ign, `https://cravatar.eu/helmavatar/${ign}/600.png`, `https://sky.shiiyu.moe/stats/${ign}`)
-				.setDescription(`**Profile:** ${apiData.data.name}`)
 				.addFields(
 					{
 						name: "Skill Roles",
@@ -102,6 +132,7 @@ module.exports = {
 					}
 				)
 				.setColor('7CFC00')
+				.setFooter(`Profile: ${apiData.data.name}`)
 				.setTimestamp()
 		).then(message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error)))
 	},
@@ -115,12 +146,12 @@ async function getUUID(ign) {
 }
 
 async function getApiData(ign, method) {
-    delete require.cache[require.resolve('../../config.json')];
-    const config = require('../../config.json');
+	delete require.cache[require.resolve('../../config.json')];
+	const config = require('../../config.json');
 
-    const UUID = await getUUID(ign);
-    const response = await fetch(`https://hypixel-api.senither.com/v1/profiles/${UUID}/${method}?key=${config.discord.apiKey}`);
-    return await response.json();
+	const UUID = await getUUID(ign);
+	const response = await fetch(`https://hypixel-api.senither.com/v1/profiles/${UUID}/${method}?key=${config.discord.apiKey}`);
+	return await response.json();
 }
 
 async function getTrueIgn(ign) {
@@ -170,8 +201,8 @@ async function getScammerData() {
 
 async function testScammer(ign) {
 	let uuidClean = await getUUID(ign);
-	uuidClean = uuidClean.replace(/-/g,"")
-	
+	uuidClean = uuidClean.replace(/-/g, "")
+
 	scammerData = await getScammerData();
 
 	if (scammerData.hasOwnProperty(uuidClean)) return true;
@@ -186,14 +217,9 @@ async function getOtherStuff(apiData) {
 		f7splustime = `N/A`;
 	}
 
-	var scammer = await testScammer(apiData.data.username);
-	if (scammer) scammer = yes;
-	else scammer = no;
-
 	return [
 		`Secrets: \`${apiData.data.dungeons.secrets_found.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}\``,
-		`Best F7 S+: \`${f7splustime}\``,
-		`Scammer: ${scammer}`
+		`Best F7 S+: \`${f7splustime}\``
 	].join('\n')
 }
 

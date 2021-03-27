@@ -45,6 +45,8 @@ module.exports = {
 
 		ign = await getTrueIgn(ign);
 
+		var scammer = await testScammer(ign);
+
 		// At this point we know its a valid IGN, but not if it has skyblock profiles
 		const apiData = await getApiData(ign, method); // Gets all skyblock player data from Senither's Hypixel API Facade
 
@@ -67,7 +69,17 @@ module.exports = {
 				.setTimestamp()
 		).then(message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error)))
 
-		if ((apiData.data.weight + apiData.data.weight_overflow) >= config.requirements.guild.weight) {
+		if (scammer) {
+			return message.channel.send(
+				new Discord.MessageEmbed()
+					.setTitle(`Denied.`)
+					.setColor(`FF8C00`)
+					.setFooter(`Weight: ${toFixed(apiData.data.weight + apiData.data.weight_overflow)}`)
+					.setAuthor(ign, `https://cravatar.eu/helmavatar/${ign}/600.png`, `http://sky.shiiyu.moe/stats/${ign}`)
+					.setDescription(`\`${ign}\` is on the scammers list`)
+					.setTimestamp()
+			).then(message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error)))
+		} else if ((apiData.data.weight + apiData.data.weight_overflow) >= config.requirements.guild.weight) {
 			return message.channel.send(
 				new Discord.MessageEmbed()
 					.setTitle(`Accepted!`)
@@ -84,7 +96,7 @@ module.exports = {
 						`Skill Grinder:	${getEmoji(apiData.data.skills.average_skills > config.requirements.guild.ranks.skills)}`
 					].join('\n'))
 					.setAuthor(ign, `https://cravatar.eu/helmavatar/${ign}/600.png`, `http://sky.shiiyu.moe/stats/${ign}`)
-					.setFooter(`Weight: ${toFixed(apiData.data.weight + apiData.data.weight_overflow)}`)
+					.setFooter(`Your Weight: ${toFixed(apiData.data.weight + apiData.data.weight_overflow)}`)
 					.setTimestamp()
 			).then(message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error)))
 		} else {
@@ -110,12 +122,12 @@ async function getUUID(ign) {
 }
 
 async function getApiData(ign, method) {
-    delete require.cache[require.resolve('../../config.json')];
-    const config = require('../../config.json');
+	delete require.cache[require.resolve('../../config.json')];
+	const config = require('../../config.json');
 
-    const UUID = await getUUID(ign);
-    const response = await fetch(`https://hypixel-api.senither.com/v1/profiles/${UUID}/${method}?key=${config.discord.apiKey}`);
-    return await response.json();
+	const UUID = await getUUID(ign);
+	const response = await fetch(`https://hypixel-api.senither.com/v1/profiles/${UUID}/${method}?key=${config.discord.apiKey}`);
+	return await response.json();
 }
 
 async function getTrueIgn(ign) {
@@ -132,4 +144,19 @@ function getEmoji(input) {
 function toFixed(num) {
 	var re = new RegExp('^-?\\d+(?:\.\\d{0,' + (2 || -1) + '})?');
 	return num.toString().match(re)[0];
+}
+
+async function getScammerData() {
+	const response = await fetch('https://raw.githubusercontent.com/skyblockz/pricecheckbot/master/scammer.json');
+	return await response.json();
+}
+
+async function testScammer(ign) {
+	let uuidClean = await getUUID(ign);
+	uuidClean = uuidClean.replace(/-/g, "")
+
+	scammerData = await getScammerData();
+
+	if (scammerData.hasOwnProperty(uuidClean)) return true;
+	return false;
 }
