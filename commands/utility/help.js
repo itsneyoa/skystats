@@ -101,6 +101,9 @@ module.exports = {
 
         var desc = [`*${command.description}*`, `Usage: \`${command.usage}\``];
 
+        if (command.maniacsOnly) desc.push(`Maniacs Only: <:yes:${yes}>`);
+        else desc.push(`Maniacs Only: <:no:${no}>`);
+
         embed.setDescription(desc.join('\n'))
         embed.addField('Aliases', `\`${command.aliases.join('\n')}\``, true)
 
