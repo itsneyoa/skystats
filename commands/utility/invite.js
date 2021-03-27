@@ -9,10 +9,15 @@ module.exports = {
     execute(message, args) {
         return message.channel.send(
             new Discord.MessageEmbed()
-                .setAuthor('neyoa', 'https://cravatar.eu/helmavatar/neyoa/600.png', 'https://neyoa.me')
-                .setDescription(`Hi! I'm still working on a few things before the bot is ready to scale for more than a few servers. Hopefully not long now!`)
+                .setDescription([
+                    `SkyStats is now public! You can invite me [here](https://skystats.neyoa.me).`,
+                    `To see updates, outages, request features and report issues join my discord [here](https://discord.neyoa.me)`,
+                    `Please note if it's added to 100 servers I'll need verification to expand even more.`,
+                    `Thanks for using SkyStats!`,
+                    `- neyoa ❤`
+                ])
                 .setColor('DC143C')
-                .setFooter('Join my discord for more updates!')
+                .setFooter('owo')
                 .setTimestamp()
         )
     },
