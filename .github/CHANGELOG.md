@@ -4,3 +4,4 @@
 2.3.0 - Added more info to `-h` command
 2.4.0 - Added logging to a discord channel in config
 2.5.0 - Made some commands only executable in the Maniacs discord
+2.5.1 - Removed wedding
