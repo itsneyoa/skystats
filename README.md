@@ -72,3 +72,7 @@ node index.js
     - This requires the normal Hypixel API instead of the facade
 - [ ] Add verification / name updating
     - Likewise, this requires the normal Hypixel API instead of the facade
+- [ ] Add metrics other than `player`
+    - Skills
+    - Dungeons
+    - Slayer
