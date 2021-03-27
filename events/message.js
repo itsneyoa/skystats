@@ -43,7 +43,7 @@ module.exports = {
                 discordLog(message.client,
                     new Discord.MessageEmbed()
                         .setAuthor(client.user.username, client.user.avatarURL())
-                        .setDescription(`${message.author} tried to use admin-only command \`${message}\``)
+                        .setDescription(`${message.author} tried to use owner-only command \`${message}\``)
                         .setColor('FF8C00')
                         .setTimestamp()
                 )
