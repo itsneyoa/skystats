@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 
 module.exports = {
     name: 'skin',
-    aliases: ['head', 'skull', 'sk'],
+    aliases: ['head', 'skull'],
     usage: 'skin [ign]',
     description: 'Gets player head from ign',
     execute(message, args) {
