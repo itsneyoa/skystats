@@ -13,6 +13,7 @@ module.exports = {
     usage: 'guildskills <guild>',
     description: 'Scans a guild, checking all members total skill experience',
     ownerOnly: true,
+    maniacsOnly: true,
     async execute(message, args) {
         if (!args[0]) {
             return message.channel.send(

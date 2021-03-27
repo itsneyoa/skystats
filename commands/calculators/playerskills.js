@@ -14,6 +14,7 @@ module.exports = {
     usage: 'playerskills [player] [profile]',
     description: 'bottom text',
     guildOnly: true,
+    maniacsOnly: true,
     async execute(message, args) {
         if (!args[0]) {
             var ign = message.member.displayName;

@@ -10,6 +10,7 @@ module.exports = {
 	aliases: ['gc', 'gcheck', 'guild'],
 	usage: 'guildcheck [ign] [profile]',
 	description: 'Tests if a player meets the requirements for a guild',
+	maniacsOnly: true,
 	async execute(message, args) {
 		delete require.cache[require.resolve('../../config.json')];
 		const config = require('../../config.json');

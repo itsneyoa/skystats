@@ -5,6 +5,7 @@ module.exports = {
     aliases: ['wed', 'ace',, 'disq'],
     usage: 'wedding',
     description: 'Holds a beautiful wedding ceremony',
+    maniacsOnly: true,
     execute(message, args) {
         return message.channel.send(
             new Discord.MessageEmbed()
