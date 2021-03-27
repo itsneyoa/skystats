@@ -2,3 +2,5 @@
 2.2.2 - Made `-wedding` command
 2.2.3 - Added option to select a profile
 2.3.0 - Added more info to `-h` command
+2.4.0 - Added logging to a discord channel in config
+2.5.0 - Made some commands only executable in the Maniacs discord
