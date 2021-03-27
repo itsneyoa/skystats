@@ -94,7 +94,7 @@ module.exports = {
                 }
                 else if (skyblockData.status == '200') {
                     try {
-                        users.push({ username: skyblockData.data.username, exp: calcSkills(skyblockData), uuid: memberUUIDs[0] });
+                        users.push({ uuid: memberUUIDs[0], exp: calcSkills(skyblockData), username: skyblockData.data.username, profile: skyblockData.data.name}); //UUID,Skill Exp,Username,Profile
                         memberUUIDs.shift();
                     } catch {
                         console.log(`Error with UUID ${memberUUIDs[0]}`);
@@ -192,7 +192,7 @@ function formatTime(time) {
 
 function ConvertToCSV(objArray) {
     var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
-    var str = 'Username,Skill Exp,UUID\n';
+    var str = 'UUID,Skill Exp,Username,Profile\n';
 
     for (var i = 0; i < array.length; i++) {
         var line = '';
