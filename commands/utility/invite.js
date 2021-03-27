@@ -16,7 +16,7 @@ module.exports = {
                     `Thanks for using SkyStats!`,
                     `- neyoa ❤`
                 ])
-                .setColor('DC143C')
+                .setColor('7CFC00')
                 .setTimestamp()
         )
     },
