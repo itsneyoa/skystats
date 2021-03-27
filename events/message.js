@@ -61,7 +61,7 @@ module.exports = {
                 discordLog(message.client,
                     new Discord.MessageEmbed()
                         .setAuthor(client.user.username, client.user.avatarURL())
-                        .setDescription(`Error caught: \`${message.author}\` tried to run \`${message} ${args.join('\n')}\``)
+                        .setDescription(`Error caught: ${message.author} tried to run \`${message} ${args.join('\n')}\``)
                         .setColor('DC143C')
                         .setTimestamp()
                 )
