@@ -19,7 +19,8 @@ module.exports = {
 
         return message.channel.send(
             new Discord.MessageEmbed()
-                .setThumbnail(`https://cravatar.eu/helmavatar/${ign}/600.png`)
+                .setAuthor(ign, `https://cravatar.eu/helmavatar/${ign}/300.png`)
+                .setImage(`https://cravatar.eu/helmavatar/${ign}/600.png`)
                 .setColor('7CFC00')
         )
     },
