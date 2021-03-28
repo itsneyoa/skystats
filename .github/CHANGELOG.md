@@ -6,3 +6,4 @@
 2.5.0 - Made some commands only executable in the Maniacs discord
 2.5.1 - Removed wedding
 2.5.2 - Fixed error logging duplicates
+2.5.3 - Created placeholder commands for dungeons, slayer and skills
