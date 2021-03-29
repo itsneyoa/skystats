@@ -49,6 +49,22 @@ module.exports = {
             )
         }
 
+        if ((!(message.member.roles.cache.some(role => role.id == config.discord.modRole))) && command.modOnly) {
+            return message.channel.send(
+                new Discord.MessageEmbed()
+                    .setDescription(`Sorry, you don't have permission to do this`)
+                    .setColor('DC143C')
+            ).then(
+                discordLog(message.client,
+                    new Discord.MessageEmbed()
+                        .setAuthor(client.user.username, client.user.avatarURL())
+                        .setDescription(`${message.author} tried to use mod-only command \`${message}\``)
+                        .setColor('FF8C00')
+                        .setTimestamp()
+                )
+            )
+        }
+
         if ((message.guild.id != config.discord.mainServer) && command.maniacsOnly) {
             return message.channel.send(
                 new Discord.MessageEmbed()

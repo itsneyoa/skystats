@@ -4,6 +4,7 @@
         "apiKey": "",
         "prefix": "-",
         "ownerId": "",
+        "modRole": "",
         "logChannel": "",
         "mainServer": ""
     },
