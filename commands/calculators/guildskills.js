@@ -12,7 +12,7 @@ module.exports = {
     aliases: ['gsk', 'guildsk'],
     usage: 'guildskills <guild>',
     description: 'Scans a guild, checking all members total skill experience',
-    ownerOnly: true,
+    modOnly: true,
     maniacsOnly: true,
     async execute(message, args) {
         if (!args[0]) {

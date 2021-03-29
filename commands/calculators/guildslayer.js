@@ -2,9 +2,6 @@ const Discord = require('discord.js');
 const fetch = require('node-fetch')
 const fs = require('fs')
 
-const lv60 = 111672425;
-const lv50 = 55172425;
-
 const loading = `819138970771652609`;
 
 module.exports = {
@@ -12,7 +9,7 @@ module.exports = {
     aliases: ['gsl', 'guildsl'],
     usage: 'guildslayer <guild>',
     description: 'Scans a guild, checking all members total slayer experience',
-    ownerOnly: true,
+    modOnly: true,
     maniacsOnly: true,
     async execute(message, args) {
         if (!args[0]) {
