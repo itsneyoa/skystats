@@ -115,14 +115,14 @@ module.exports = {
                     {
                         name: 'Weight',
                         value: [
-                            toFixed(apiData.data.skills.mining.weight + apiData.data.skills.mining.weight_overflow),
-                            toFixed(apiData.data.skills.foraging.weight + apiData.data.skills.foraging.weight_overflow),
-                            toFixed(apiData.data.skills.enchanting.weight + apiData.data.skills.enchanting.weight_overflow),
-                            toFixed(apiData.data.skills.farming.weight + apiData.data.skills.farming.weight_overflow),
-                            toFixed(apiData.data.skills.combat.weight + apiData.data.skills.combat.weight_overflow),
-                            toFixed(apiData.data.skills.fishing.weight + apiData.data.skills.fishing.weight_overflow),
-                            toFixed(apiData.data.skills.alchemy.weight + apiData.data.skills.alchemy.weight_overflow),
-                            toFixed(apiData.data.skills.taming.weight + apiData.data.skills.taming.weight_overflow)
+                            `**${toFixed(apiData.data.skills.mining.weight)}** + ${toFixed(apiData.data.skills.mining.weight_overflow)} *(${toFixed(apiData.data.skills.mining.weight + apiData.data.skills.mining.weight_overflow)})*`,
+                            `**${toFixed(apiData.data.skills.foraging.weight)}** + ${toFixed(apiData.data.skills.foraging.weight_overflow)} *(${toFixed(apiData.data.skills.foraging.weight + apiData.data.skills.foraging.weight_overflow)})*`,
+                            `**${toFixed(apiData.data.skills.enchanting.weight)}** + ${toFixed(apiData.data.skills.enchanting.weight_overflow)} *(${toFixed(apiData.data.skills.enchanting.weight + apiData.data.skills.enchanting.weight_overflow)})*`,
+                            `**${toFixed(apiData.data.skills.farming.weight)}** + ${toFixed(apiData.data.skills.farming.weight_overflow)} *(${toFixed(apiData.data.skills.farming.weight + apiData.data.skills.farming.weight_overflow)})*`,
+                            `**${toFixed(apiData.data.skills.combat.weight)}** + ${toFixed(apiData.data.skills.combat.weight_overflow)} *(${toFixed(apiData.data.skills.combat.weight + apiData.data.skills.combat.weight_overflow)})*`,
+                            `**${toFixed(apiData.data.skills.fishing.weight)}** + ${toFixed(apiData.data.skills.fishing.weight_overflow)} *(${toFixed(apiData.data.skills.fishing.weight + apiData.data.skills.fishing.weight_overflow)})*`,
+                            `**${toFixed(apiData.data.skills.alchemy.weight)}** + ${toFixed(apiData.data.skills.alchemy.weight_overflow)} *(${toFixed(apiData.data.skills.alchemy.weight + apiData.data.skills.alchemy.weight_overflow)})*`,
+                            `**${toFixed(apiData.data.skills.taming.weight)}** + ${toFixed(apiData.data.skills.taming.weight_overflow)} *(${toFixed(apiData.data.skills.taming.weight + apiData.data.skills.taming.weight_overflow)})*`
                         ].join('\n'),
                         inline: true
                     },
@@ -148,9 +148,9 @@ module.exports = {
                     {
                         name: 'Weight',
                         value: [
-                            toFixed(apiData.data.slayers.bosses.revenant.weight + apiData.data.slayers.bosses.revenant.weight_overflow),
-                            toFixed(apiData.data.slayers.bosses.tarantula.weight + apiData.data.slayers.bosses.tarantula.weight_overflow),
-                            toFixed(apiData.data.slayers.bosses.sven.weight + apiData.data.slayers.bosses.sven.weight_overflow)
+                            `**${toFixed(apiData.data.slayers.bosses.revenant.weight)}** + ${toFixed(apiData.data.slayers.bosses.revenant.weight_overflow)} *(${toFixed(apiData.data.slayers.bosses.revenant.weight + apiData.data.slayers.bosses.revenant.weight_overflow)})*`,
+                            `**${toFixed(apiData.data.slayers.bosses.tarantula.weight)}** + ${toFixed(apiData.data.slayers.bosses.tarantula.weight_overflow)} *(${toFixed(apiData.data.slayers.bosses.tarantula.weight + apiData.data.slayers.bosses.tarantula.weight_overflow)})*`,
+                            `**${toFixed(apiData.data.slayers.bosses.sven.weight)}** + ${toFixed(apiData.data.slayers.bosses.sven.weight_overflow)} *(${toFixed(apiData.data.slayers.bosses.sven.weight + apiData.data.slayers.bosses.sven.weight_overflow)})*`
                         ].join('\n'),
                         inline: true
                     },
@@ -182,12 +182,12 @@ module.exports = {
                     {
                         name: 'Weight',
                         value: [
-                            toFixed(apiData.data.dungeons.types.catacombs.weight + apiData.data.dungeons.types.catacombs.weight_overflow),
-                            toFixed(apiData.data.dungeons.classes.healer.weight + apiData.data.dungeons.classes.healer.weight_overflow),
-                            toFixed(apiData.data.dungeons.classes.mage.weight + apiData.data.dungeons.classes.mage.weight_overflow),
-                            toFixed(apiData.data.dungeons.classes.berserker.weight + apiData.data.dungeons.classes.berserker.weight_overflow),
-                            toFixed(apiData.data.dungeons.classes.archer.weight + apiData.data.dungeons.classes.archer.weight_overflow),
-                            toFixed(apiData.data.dungeons.classes.tank.weight + apiData.data.dungeons.classes.tank.weight_overflow)
+                            `**${toFixed(apiData.data.dungeons.types.catacombs.weight)}** + ${toFixed(apiData.data.dungeons.types.catacombs.weight_overflow)} *(${toFixed(apiData.data.dungeons.types.catacombs.weight + apiData.data.dungeons.types.catacombs.weight_overflow)})*`,
+                            `**${toFixed(apiData.data.dungeons.classes.healer.weight)}** + ${toFixed(apiData.data.dungeons.classes.healer.weight_overflow)} *(${toFixed(apiData.data.dungeons.classes.healer.weight + apiData.data.dungeons.classes.healer.weight_overflow)})*`,
+                            `**${toFixed(apiData.data.dungeons.classes.mage.weight)}** + ${toFixed(apiData.data.dungeons.classes.mage.weight_overflow)} *(${toFixed(apiData.data.dungeons.classes.mage.weight + apiData.data.dungeons.classes.mage.weight_overflow)})*`,
+                            `**${toFixed(apiData.data.dungeons.classes.berserker.weight)}** + ${toFixed(apiData.data.dungeons.classes.berserker.weight_overflow)} *(${toFixed(apiData.data.dungeons.classes.berserker.weight + apiData.data.dungeons.classes.berserker.weight_overflow)})*`,
+                            `**${toFixed(apiData.data.dungeons.classes.archer.weight)}** + ${toFixed(apiData.data.dungeons.classes.archer.weight_overflow)} *(${toFixed(apiData.data.dungeons.classes.archer.weight + apiData.data.dungeons.classes.archer.weight_overflow)})*`,
+                            `**${toFixed(apiData.data.dungeons.classes.tank.weight)}** + ${toFixed(apiData.data.dungeons.classes.tank.weight_overflow)} *(${toFixed(apiData.data.dungeons.classes.tank.weight + apiData.data.dungeons.classes.tank.weight_overflow)})*`,
                         ].join('\n'),
                         inline: true
                     },
