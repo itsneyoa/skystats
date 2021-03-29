@@ -1,6 +1,6 @@
 {
     "name": "skystats",
-    "version": "2.5.5",
+    "version": "2.5.6",
     "description": "A discord.js bot to get key metrics of a player in Hypixel Skyblock",
     "main": "index.js",
     "author": "neyoa",

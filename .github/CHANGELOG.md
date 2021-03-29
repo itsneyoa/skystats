@@ -9,3 +9,4 @@
 2.5.3 - Created placeholder commands for dungeons, slayer and skills
 2.5.4 - Made skin command bigger and show ign
 2.5.5 - Made guild scanning commands mod only
+2.5.6 - Changed weight command to show overflow
