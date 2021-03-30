@@ -76,3 +76,11 @@ node index.js
     - Skills
     - Dungeons
     - Slayer
+- [ ] Add rep system
+    - Gives new roles at certain 'rep' milestones
+    - Adds suffix to name based on rep score (maybe)
+- [ ] Add party creator system
+    - Command to open a party with set max size
+    - People react with ✔ or ✘
+    - After party is full or an amount of time has passed the party is closed and leader is sent a list of people to invite by DMs
+    - Possibly make it automatically split the members into invite command to send to the leader
