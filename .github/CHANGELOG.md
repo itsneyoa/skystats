@@ -10,3 +10,4 @@
 2.5.4 - Made skin command bigger and show ign
 2.5.5 - Made guild scanning commands mod only
 2.5.6 - Changed weight command to show overflow
+2.5.7 - Removed UUID getting split with dashes (Not sure why I added this in the first place)
