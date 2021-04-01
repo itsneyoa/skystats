@@ -42,24 +42,14 @@ module.exports = {
         // At this point we know its a valid IGN, but not if it has skyblock profiles
         const apiData = await getApiData(ign, method); // Gets all skyblock player data from Senither's Hypixel API Facade
 
-        if (apiData.status == 404) {
-            if (apiData.reason == 'Failed to find a profile using the given strategy') {
-                return message.channel.send(
-                    new Discord.MessageEmbed()
-                        .setDescription(`Profile \`${method}\` not found for \`${ign}\``)
-                        .setColor('DC143C')
-                        .setTimestamp()
-                ).then(message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error)))
-            } else {
-                return message.channel.send(
-                    new Discord.MessageEmbed()
-                        .setDescription(`No Skyblock profile found for \`${ign}\``)
-                        .setColor('DC143C')
-                        .setTimestamp()
-                ).then(message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error)))
-            }
-        }
-
+		if (apiData.status != 200) {
+			return message.channel.send(
+				new Discord.MessageEmbed()
+					.setDescription(apiData.reason)
+					.setColor('DC143C')
+					.setTimestamp()
+			).then(message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error)))
+		}
         // IGN is valid and player has skyblock profiles
 
         if (apiData.data.skills.apiEnabled == false) return message.channel.send(
