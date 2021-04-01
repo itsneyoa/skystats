@@ -8,7 +8,7 @@ const loading = `819138970771652609`;
 module.exports = {
 	name: 'guildcheck',
 	aliases: ['gc', 'gcheck', 'guild'],
-	usage: 'guildcheck [ign] [profile]',
+	usage: 'guildcheck [ign]',
 	description: 'Tests if a player meets the requirements for a guild',
 	maniacsOnly: true,
 	async execute(message, args) {
@@ -23,9 +23,6 @@ module.exports = {
 			}
 			else var ign = args[0];
 		} // Gets IGN
-
-		var method = 'save';
-		if (args[1]) method = args[1];
 
 		ign = ign.replace(/\W/g, ''); // removes weird characters
 
@@ -48,7 +45,7 @@ module.exports = {
 		var scammer = await testScammer(ign);
 
 		// At this point we know its a valid IGN, but not if it has skyblock profiles
-		const apiData = await getApiData(ign, method); // Gets all skyblock player data from Senither's Hypixel API Facade
+		const apiData = await getApiData(ign); // Gets all skyblock player data from Senither's Hypixel API Facade
 
 		if (apiData.status != 200) {
 			return message.channel.send(
@@ -125,7 +122,7 @@ async function getApiData(ign, method) {
 	const config = require('../../config.json');
 
 	const UUID = await getUUID(ign);
-	const response = await fetch(`https://hypixel-api.senither.com/v1/profiles/${UUID}/${method}?key=${config.discord.apiKey}`);
+	const response = await fetch(`https://hypixel-api.senither.com/v1/profiles/${UUID}/weight?key=${config.discord.apiKey}`);
 	return await response.json();
 }
 
