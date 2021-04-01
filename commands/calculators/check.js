@@ -141,8 +141,7 @@ module.exports = {
 async function getUUID(ign) {
 	const response = await fetch(`https://api.mojang.com/users/profiles/minecraft/${ign}`);
 	const result = await response.json();
-	const uuid = result.id;
-	return uuid.substr(0, 8) + "-" + uuid.substr(8, 4) + "-" + uuid.substr(12, 4) + "-" + uuid.substr(16, 4) + "-" + uuid.substr(20);
+	return result.id;
 }
 
 async function getApiData(ign, method) {
@@ -200,12 +199,10 @@ async function getScammerData() {
 }
 
 async function testScammer(ign) {
-	let uuidClean = await getUUID(ign);
-	uuidClean = uuidClean.replace(/-/g, "")
-
+	let uuid = await getUUID(ign);
 	scammerData = await getScammerData();
 
-	if (scammerData.hasOwnProperty(uuidClean)) return true;
+	if (scammerData.hasOwnProperty(uuid)) return true;
 	return false;
 }
 

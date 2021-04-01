@@ -88,10 +88,9 @@ module.exports = {
 };
 
 async function getUUID(ign) {
-    const response = await fetch(`https://api.mojang.com/users/profiles/minecraft/${ign}`);
-    const result = await response.json();
-    const uuid = result.id;
-    return uuid.substr(0, 8) + "-" + uuid.substr(8, 4) + "-" + uuid.substr(12, 4) + "-" + uuid.substr(16, 4) + "-" + uuid.substr(20);
+	const response = await fetch(`https://api.mojang.com/users/profiles/minecraft/${ign}`);
+	const result = await response.json();
+	return result.id;
 }
 
 async function getApiData(ign, method) {
