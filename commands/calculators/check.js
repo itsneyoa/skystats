@@ -9,7 +9,7 @@ module.exports = {
 	name: 'check',
 	aliases: ['c'],
 	usage: 'check [ign] [profile]',
-	description: 'Gets if player meets certain role requirements',
+	description: 'Gets if player meets requirements for roles',
 	maniacsOnly: true,
 	async execute(message, args) {
 		if (!args[0]) {

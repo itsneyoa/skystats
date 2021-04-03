@@ -11,7 +11,7 @@ module.exports = {
     name: 'guildskills',
     aliases: ['gsk', 'guildsk'],
     usage: 'guildskills <guild>',
-    description: 'Scans a guild, checking all members total skill experience',
+    description: 'Scans a guild, checking all members total skill experience using the maniacs method',
     modOnly: true,
     maniacsOnly: true,
     async execute(message, args) {

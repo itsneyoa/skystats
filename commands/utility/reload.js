@@ -4,8 +4,8 @@ const fs = require('fs');
 module.exports = {
     name: 'reload',
     aliases: ['restart', 'r'],
-    usage: 'reload <command>',
-    description: 'Reloads a command',
+    usage: 'reload [command(s)]',
+    description: 'Reloads any command(s)',
     ownerOnly: true,
     execute(message, args) {
         var commandsList = [];

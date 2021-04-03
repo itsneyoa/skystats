@@ -8,7 +8,7 @@ module.exports = {
     name: 'help',
     aliases: ['h', 'info', `commands`],
     usage: 'help [command]',
-    description: 'Gets information about the bot',
+    description: 'Gets information about the bot or a specific command',
     execute(message, args) {
         if (!args.length) {
             delete require.cache[require.resolve('../../package.json')];

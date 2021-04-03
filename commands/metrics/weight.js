@@ -7,7 +7,7 @@ module.exports = {
     name: 'weight',
     aliases: ['we'],
     usage: 'weight [ign] [profile]',
-    description: "Gets the weight of a player's profile",
+    description: "Gets the weight of a player's profile. This is a number generated from your Skills, Slayers and Dungeons levels.",
     async execute(message, args) {
         if (!args[0]) {
             var ign = message.member.displayName;

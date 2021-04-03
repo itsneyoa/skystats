@@ -12,7 +12,7 @@ module.exports = {
     name: 'playerskills',
     aliases: ['psk', 'playersk'],
     usage: 'playerskills [player] [profile]',
-    description: 'bottom text',
+    description: 'Gets the skill experience of a player using the maniacs method',
     guildOnly: true,
     maniacsOnly: true,
     async execute(message, args) {

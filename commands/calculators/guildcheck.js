@@ -8,8 +8,8 @@ const loading = `819138970771652609`;
 module.exports = {
 	name: 'guildcheck',
 	aliases: ['gc', 'gcheck', 'guild'],
-	usage: 'guildcheck [ign]',
-	description: 'Tests if a player meets the requirements for a guild',
+	usage: 'guildcheck [ign] [profile]',
+	description: 'Tests if a player meets the requirements for the Skyblock Maniacs Guild',
 	maniacsOnly: true,
 	async execute(message, args) {
 		delete require.cache[require.resolve('../../config.json')];

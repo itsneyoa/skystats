@@ -7,7 +7,7 @@ module.exports = {
     name: 'player',
     aliases: ['p', 'stats'],
     usage: 'player [ign] [profile]',
-    description: "Gets key player metrics",
+    description: "Gets key player metrics (still a work in progress)",
     async execute(message, args) {
         if (!args[0]) {
             var ign = message.member.displayName;

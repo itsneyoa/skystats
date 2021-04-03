@@ -3,8 +3,8 @@ const Discord = require('discord.js');
 module.exports = {
     name: 'invite',
     aliases: ['i', 'inv'],
-    usage: 'Invite me to your server!',
-    description: 'invite',
+    usage: 'invite',
+    description: 'Invite me to your server!',
     execute(message, args) {
         return message.channel.send(
             new Discord.MessageEmbed()
