@@ -81,16 +81,6 @@ module.exports = {
 					name: "Skill Roles",
 					value: getSkillRoles(apiData),
 					inline: true
-				},
-				{
-					name: "Carriers",
-					value: getDungeonRoles(apiData),
-					inline: true
-				},
-				{
-					name: "Other",
-					value: await getOtherStuff(apiData),
-					inline: true
 				}
 			)
 			.setFooter(`Profile: ${apiData.data.name}`)
@@ -144,26 +134,6 @@ function getSkillRoles(apiData) {
 	].join('\n');
 }
 
-function getDungeonRoles(apiData) {
-	delete require.cache[require.resolve('../../config.json')];
-	const config = require('../../config.json');
-
-	var f4 = apiData.data.dungeons.types.catacombs.level >= config.requirements.roles.dungeons.f4;
-	var f5 = apiData.data.dungeons.types.catacombs.level >= config.requirements.roles.dungeons.f5;
-	var f6 = apiData.data.dungeons.types.catacombs.level >= config.requirements.roles.dungeons.f6;
-	var f7 = apiData.data.dungeons.types.catacombs.level >= config.requirements.roles.dungeons.f7;
-	if (f4) f4 = yes; else f4 = no;
-	if (f5) f5 = yes; else f5 = no;
-	if (f6) f6 = yes; else f6 = no;
-	if (f7) f7 = yes; else f7 = no;
-	return [
-		`Floor 4:	${f4}`,
-		`Floor 5:	${f5}`,
-		`Floor 6:	${f6}`,
-		`Floor 7:	${f7}`,
-	].join('\n')
-}
-
 async function getScammerData() {
 	const response = await fetch('https://raw.githubusercontent.com/skyblockz/pricecheckbot/master/scammer.json');
 	return await response.json();
@@ -175,34 +145,4 @@ async function testScammer(ign) {
 
 	if (scammerData.hasOwnProperty(uuid)) return true;
 	return false;
-}
-
-async function getOtherStuff(apiData) {
-	var f7splustime;
-	try {
-		f7splustime = formatTime(apiData.data.dungeons.types.catacombs.fastest_time_s_plus.tier_7.seconds);
-	} catch {
-		f7splustime = `N/A`;
-	}
-
-	return [
-		`Secrets: \`${apiData.data.dungeons.secrets_found.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}\``,
-		`Best F7 S+: \`${f7splustime}\``
-	].join('\n')
-}
-
-function formatTime(time) {
-	// Hours, minutes and seconds
-	var hrs = ~~(time / 3600);
-	var mins = ~~((time % 3600) / 60);
-	var secs = ~~time % 60;
-
-	// Output like "1:01" or "4:03:59" or "123:03:59"
-	var ret = "";
-	if (hrs > 0) {
-		ret += "" + hrs + ":" + (mins < 10 ? "0" : "");
-	}
-	ret += "" + mins + ":" + (secs < 10 ? "0" : "");
-	ret += "" + secs;
-	return ret;
 }
