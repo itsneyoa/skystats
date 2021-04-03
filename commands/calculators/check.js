@@ -74,58 +74,38 @@ module.exports = {
 			)
 		}
 
+		var returnEmbed = new Discord.MessageEmbed()
+			.setAuthor(ign, `https://cravatar.eu/helmavatar/${ign}/600.png`, `https://sky.shiiyu.moe/stats/${ign}`)
+			.addFields(
+				{
+					name: "Skill Roles",
+					value: getSkillRoles(apiData),
+					inline: true
+				},
+				{
+					name: "Carriers",
+					value: getDungeonRoles(apiData),
+					inline: true
+				},
+				{
+					name: "Other",
+					value: await getOtherStuff(apiData),
+					inline: true
+				}
+			)
+			.setFooter(`Profile: ${apiData.data.name}`)
+			.setTimestamp()
+
+
 		if (scammer) {
-			return message.channel.send(
-				new Discord.MessageEmbed()
-					.setAuthor(ign, `https://cravatar.eu/helmavatar/${ign}/600.png`, `https://sky.shiiyu.moe/stats/${ign}`)
-					.setDescription(`:warning: **This user is a scammer** :warning:`)
-					.addFields(
-						{
-							name: "Skill Roles",
-							value: getSkillRoles(apiData),
-							inline: true
-						},
-						{
-							name: "Carriers",
-							value: getDungeonRoles(apiData),
-							inline: true
-						},
-						{
-							name: "Other",
-							value: await getOtherStuff(apiData),
-							inline: true
-						}
-					)
-					.setColor('FF8C00')
-					.setFooter(`Profile: ${apiData.data.name}`)
-					.setTimestamp()
-			).then(message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error)))
+			returnEmbed.setDescription(`:warning: **This user is a scammer** :warning:`)
+			returnEmbed.setColor('FF8C00')
+		} else {
+			returnEmbed.setColor('7CFC00')
 		}
 
-		return message.channel.send(
-			new Discord.MessageEmbed()
-				.setAuthor(ign, `https://cravatar.eu/helmavatar/${ign}/600.png`, `https://sky.shiiyu.moe/stats/${ign}`)
-				.addFields(
-					{
-						name: "Skill Roles",
-						value: getSkillRoles(apiData),
-						inline: true
-					},
-					{
-						name: "Carriers",
-						value: getDungeonRoles(apiData),
-						inline: true
-					},
-					{
-						name: "Other",
-						value: await getOtherStuff(apiData),
-						inline: true
-					}
-				)
-				.setColor('7CFC00')
-				.setFooter(`Profile: ${apiData.data.name}`)
-				.setTimestamp()
-		).then(message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error)))
+		return message.channel.send(returnEmbed)
+			.then(message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error)))
 	},
 };
 
