@@ -47,8 +47,7 @@ module.exports = {
                 `Prefix: \`${config.discord.prefix}\``,
                 `Issues: [click here](https://github.com/itsneyoa/skystats/issues)`,
                 `Server: \`${message.guild.name}\``,
-                `Channel: ${message.channel}`,
-                `Discord: [click here](https://discord.neyoa.me)`
+                `Channel: ${message.channel}`
             ].join('\n'), true)
 
             embed.addField('Stats', [
