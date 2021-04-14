@@ -25,26 +25,48 @@ module.exports = {
         message.react(loading);
 
         const res = await scamCheck(ign)
+        if (res.status != 200) {
+            if (res.status == 405) {
+                return message.channel.send(
+                    new Discord.MessageEmbed()
+                        .setColor('FF8C00')
+                        .setTitle(`Invalid player specified`)
+                        .setDescription(`Player \`${ign}\` could not be found`)
+                        .setFooter(`${res.status} - ${res.statusText}`)
+                        .setTimestamp()
+                )
+            } else {
+                return message.channel.send(
+                    new Discord.MessageEmbed()
+                        .setColor('FF8C00')
+                        .setTitle(`Something went wrong`)
+                        .setDescription(`Please try again later`)
+                        .setFooter(`${res.status} - ${res.statusText}`)
+                        .setTimestamp()
+                )
+            }
+        }
+        const resJson = await res.json()
 
-        if (res.scammerInfo.scammer) {
+        if (resJson.scammerInfo.scammer) {
             return message.channel.send(
                 new Discord.MessageEmbed()
-                    .setAuthor(res.name, `https://mc-heads.net/avatar/${res.name}`)
+                    .setAuthor(resJson.name, `https://mc-heads.net/avatar/${resJson.name}`)
                     .addField(`User is a scammer`, [
-                        `**Reason:** ${res.scammerInfo.reason}`,
-                        `**Staff:** \`${res.scammerInfo.staff}\``
+                        `**Reason:** ${resJson.scammerInfo.reason}`,
+                        `**Staff:** \`${resJson.scammerInfo.staff}\``
                     ].join('\n'))
                     .setColor('DC143C')
-                    .setFooter(`UUID: ${res.uuid}`)
+                    .setFooter(`UUID: ${resJson.uuid}`)
                     .setTimestamp()
             ).then(message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error)))
         } else {
             return message.channel.send(
                 new Discord.MessageEmbed()
-                    .setAuthor(res.name, `https://mc-heads.net/avatar/${res.name}`)
+                    .setAuthor(resJson.name, `https://mc-heads.net/avatar/${resJson.name}`)
                     .addField(`User is not a scammer`, `Please still be careful when trading with anyone!`)
                     .setColor('7CFC00')
-                    .setFooter(`UUID: ${res.uuid}`)
+                    .setFooter(`UUID: ${resJson.uuid}`)
                     .setTimestamp()
             ).then(message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error)))
         }
@@ -53,6 +75,5 @@ module.exports = {
 
 async function scamCheck(ign) {
     const res = await fetch(`https://neyoa.me/api/skyblock/scammer?ign=${ign}`)
-    resJson = await res.json()
-    return resJson
+    return res
 }
