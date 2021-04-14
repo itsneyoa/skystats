@@ -9,7 +9,8 @@ module.exports = {
 	name: 'check',
 	aliases: ['c'],
 	usage: 'check [ign] [profile]',
-	description: 'Gets if player meets requirements for roles',
+	tldr: 'Gets if player meets requirements for roles',
+	description: 'Tests if a given users profile meets the requirements for any of the roles in Skyblock Maniacs.\nUpdated everytime new roles are made or requirements are updated.',
 	maniacsOnly: true,
 	async execute(message, args) {
 		if (!args[0]) {

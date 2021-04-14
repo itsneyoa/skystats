@@ -8,6 +8,7 @@ module.exports = {
     name: 'guildslayer',
     aliases: ['gsl', 'guildsl'],
     usage: 'guildslayer <guild>',
+    tldr: 'Gets the total maniacs skill exp for all guild members',
     description: 'Scans a guild, checking all members total slayer experience',
     modOnly: true,
     maniacsOnly: true,

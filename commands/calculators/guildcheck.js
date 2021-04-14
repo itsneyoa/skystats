@@ -9,7 +9,8 @@ module.exports = {
 	name: 'guildcheck',
 	aliases: ['gc', 'gcheck', 'guild'],
 	usage: 'guildcheck [ign] [profile]',
-	description: 'Tests if a player meets the requirements for the Skyblock Maniacs Guild',
+	tldr: 'Checks if a player meets the requirements for the Skyblock Maniacs Guild',
+	description: 'Tests if a given users profile meets the requirements for the SMB Guild.\nUpdated everytime new requirements are changed.',
 	maniacsOnly: true,
 	async execute(message, args) {
 		delete require.cache[require.resolve('../../config.json')];

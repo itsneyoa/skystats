@@ -1,7 +1,5 @@
 const Discord = require('discord.js');
 const fetch = require('node-fetch')
-const fs = require('fs')
-const sleepTime = 500;
 
 const lv60 = 111672425;
 const lv50 = 55172425;
@@ -12,7 +10,8 @@ module.exports = {
     name: 'playerskills',
     aliases: ['psk', 'playersk'],
     usage: 'playerskills [player] [profile]',
-    description: 'Gets the skill experience of a player using the maniacs method',
+    tldr: 'Gets the maniacs skill exp of a player',
+    description: 'Gets the skill experience of a player using the maniacs method\nThis is all skill experience up to max level in Farming, Mining, Combat, Foraging and Fishing',
     guildOnly: true,
     maniacsOnly: true,
     async execute(message, args) {
