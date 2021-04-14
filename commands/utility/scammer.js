@@ -34,7 +34,7 @@ module.exports = {
                         .setDescription(`Player \`${ign}\` could not be found`)
                         .setFooter(`${res.status} - ${res.statusText}`)
                         .setTimestamp()
-                )
+                ).then(message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error)))
             } else {
                 return message.channel.send(
                     new Discord.MessageEmbed()
@@ -43,7 +43,7 @@ module.exports = {
                         .setDescription(`Please try again later`)
                         .setFooter(`${res.status} - ${res.statusText}`)
                         .setTimestamp()
-                )
+                ).then(message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error)))
             }
         }
         const resJson = await res.json()
