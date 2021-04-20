@@ -16,3 +16,4 @@
 2.5.10 - Rewrote some command descriptions and usages
 2.5.11 - Removed privilaged intents
 2.5.12 - Remove invite, add reboot
+2.5.13 - Reword guildcheck for multiple guilds
