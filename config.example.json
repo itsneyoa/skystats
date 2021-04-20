@@ -22,10 +22,34 @@
             }
         },
         "guild": {
-            "weight": 2750,
-            "ranks": {
-                "catacombs": 35,
-                "skills": 40
+            "terminal": {
+                "weight": 5000,
+                "ranks": {
+                    "vape": {
+                        "skill": 48,
+                        "catacombs": 38
+                    },
+                    "f11": {
+                        "skill": 48
+                    },
+                    "hael9": {
+                        "catacombs": 38
+                    }
+                }
+            },
+            "eternal": {
+                "weight": 3000,
+                "ranks": {
+                    "dungeoneer": {
+                        "catacombs": 33
+                    },
+                    "skillgrinder": {
+                        "skill": 43.5
+                    },
+                    "slayermaniacs": {
+                        "slayer": 1500000
+                    }
+                }
             }
         }
     }

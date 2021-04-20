@@ -11,7 +11,6 @@ module.exports = {
 	usage: 'guildcheck [ign] [profile]',
 	tldr: 'Checks if a player meets the requirements for the Skyblock Maniacs Guild',
 	description: 'Tests if a given users profile meets the requirements for the SMB Guild.\nUpdated everytime new requirements are changed.',
-	maniacsOnly: true,
 	async execute(message, args) {
 		delete require.cache[require.resolve('../../config.json')];
 		const config = require('../../config.json');
@@ -77,21 +76,43 @@ module.exports = {
 					.setDescription(`\`${ign}\` is on the scammers list`)
 					.setTimestamp()
 			).then(message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error)))
-		} else if ((apiData.data.weight + apiData.data.weight_overflow) >= config.requirements.guild.weight) {
+		} else if ((apiData.data.weight + apiData.data.weight_overflow) >= config.requirements.guild.terminal.weight) {
 			return message.channel.send(
 				new Discord.MessageEmbed()
 					.setTitle(`Accepted!`)
 					.setColor(`32CD32`)
 					.setDescription([
-						`You meet the requirements to join the guild!`,
+						`You meet the requirements to Terminal Velocity!`,
 						`Before we invite you please make sure you:`,
 						`- Aren't currently in a guild`,
 						`- Have guild invites privacy settings on low`,
 						`- Are able to accept the invite`
 					].join('\n'))
 					.addField('Roles:', [
-						`Dungeoneer: 	${getEmoji(apiData.data.dungeons.types.catacombs.level > config.requirements.guild.ranks.catacombs)}`,
-						`Skill Grinder:	${getEmoji(apiData.data.skills.average_skills > config.requirements.guild.ranks.skills)}`
+						`Vape:	${getEmoji((apiData.data.dungeons.types.catacombs.level > config.requirements.guild.terminal.ranks.hael9.catacombs) && (apiData.data.skills.average_skills > config.requirements.guild.terminal.ranks.vape.skill))}`,
+						`F11:	${getEmoji(apiData.data.skills.average_skills > config.requirements.guild.terminal.ranks.f11.skill)}`,
+						`Hael9:	${getEmoji(apiData.data.dungeons.types.catacombs.level > config.requirements.guild.terminal.ranks.hael9.catacombs)}`
+					].join('\n'))
+					.setAuthor(ign, `https://cravatar.eu/helmavatar/${ign}/600.png`, `http://sky.shiiyu.moe/stats/${ign}`)
+					.setFooter(`Your Weight: ${toFixed(apiData.data.weight + apiData.data.weight_overflow)}`)
+					.setTimestamp()
+			).then(message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error)))
+		} else if ((apiData.data.weight + apiData.data.weight_overflow) >= config.requirements.guild.eternal.weight) {
+			return message.channel.send(
+				new Discord.MessageEmbed()
+					.setTitle(`Accepted!`)
+					.setColor(`32CD32`)
+					.setDescription([
+						`You meet the requirements to Eternal Velocity!`,
+						`Before we invite you please make sure you:`,
+						`- Aren't currently in a guild`,
+						`- Have guild invites privacy settings on low`,
+						`- Are able to accept the invite`
+					].join('\n'))
+					.addField('Roles:', [
+						`Dungeoneer:	${getEmoji(apiData.data.dungeons.types.catacombs.level > config.requirements.guild.eternal.ranks.dungeoneer)}`,
+						`Skill Grinder:	${getEmoji(apiData.data.skills.average_skills > config.requirements.guild.eternal.ranks.skillgrinder)}`,
+						`Slayer Maniac:	${getEmoji(apiData.data.dungeons.types.catacombs.level > config.requirements.guild.eternal.ranks.slayermaniacs)}`
 					].join('\n'))
 					.setAuthor(ign, `https://cravatar.eu/helmavatar/${ign}/600.png`, `http://sky.shiiyu.moe/stats/${ign}`)
 					.setFooter(`Your Weight: ${toFixed(apiData.data.weight + apiData.data.weight_overflow)}`)
@@ -102,10 +123,9 @@ module.exports = {
 				new Discord.MessageEmbed()
 					.setTitle(`Denied.`)
 					.setColor(`DC143C`)
-					.setFooter(`If you think this is wrong we'll check manually for you`)
 					.setAuthor(ign, `https://cravatar.eu/helmavatar/${ign}/600.png`, `http://sky.shiiyu.moe/stats/${ign}`)
-					.setDescription(`Sorry but you don't currently have ${config.requirements.guild.weight} weight.`)
-					.addField("Your weight:", toFixed(apiData.data.weight + apiData.data.weight_overflow))
+					.setDescription(`Sorry but you don't currently have ${config.requirements.guild.eternal.weight} weight.`)
+					.setFooter(`Your weight: ${toFixed(apiData.data.weight + apiData.data.weight_overflow)}`)
 					.setTimestamp()
 			).then(message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error)))
 		}
