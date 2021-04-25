@@ -11,9 +11,9 @@
     "requirements": {
         "roles": {
             "dungeons": {
-                "f4": 26,
-                "f5": 27,
-                "f6": 30,
+                "f4": 25,
+                "f5": 28,
+                "f6": 32,
                 "f7": 36
             },
             "skills": {
