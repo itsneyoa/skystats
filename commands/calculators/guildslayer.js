@@ -11,7 +11,6 @@ module.exports = {
     tldr: 'Gets the total maniacs skill exp for all guild members',
     description: 'Scans a guild, checking all members total slayer experience',
     modOnly: true,
-    maniacsOnly: true,
     async execute(message, args) {
         if (!args[0]) {
             return message.channel.send(

@@ -14,7 +14,6 @@ module.exports = {
     tldr: 'Gets the total maniacs skill exp for all guild members',
     description: 'Scans a guild, checking all members total skill experience using the maniacs method\nThis is all skill experience up to max level in Farming, Mining, Combat, Foraging and Fishing',
     modOnly: true,
-    maniacsOnly: true,
     async execute(message, args) {
         if (!args[0]) {
             return message.channel.send(

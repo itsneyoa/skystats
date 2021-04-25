@@ -43,13 +43,13 @@ module.exports = {
         const apiData = await getApiData(ign, method); // Gets all skyblock player data from Senither's Hypixel API Facade
 
         if (apiData.status != 200) {
-			return message.channel.send(
-				new Discord.MessageEmbed()
-					.setDescription(apiData.reason)
-					.setColor('DC143C')
-					.setTimestamp()
-			).then(message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error)))
-		}
+            return message.channel.send(
+                new Discord.MessageEmbed()
+                    .setDescription(apiData.reason)
+                    .setColor('DC143C')
+                    .setTimestamp()
+            ).then(message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error)))
+        }
 
         // IGN is valid and player has skyblock profiles
 
@@ -62,9 +62,9 @@ module.exports = {
 };
 
 async function getUUID(ign) {
-	const response = await fetch(`https://api.mojang.com/users/profiles/minecraft/${ign}`);
-	const result = await response.json();
-	return result.id;
+    const response = await fetch(`https://api.mojang.com/users/profiles/minecraft/${ign}`);
+    const result = await response.json();
+    return result.id;
 }
 
 async function getApiData(ign, method) {
